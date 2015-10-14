@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
 using Gamepad.Service.Data.Entities;
 using Gamepad.Service.Liberary;
 using Gamepad.Utility.Async;
@@ -55,17 +56,23 @@ namespace Gamepad.Service.Data
 
         public void Seed(GamepadContext context)
         {
+            var admin = context.Users.FirstOrDefault(x => x.Username == "admin");
+            if (admin != null)
+                return;
+
+            var role = context.Roles.FirstOrDefault(x => x.Name == "superadmin");
+
             var adminUser = new User
             {
                 AccessFailed = 0,
                 Email = "behnam.zeighami@gmail.com",
                 IsActive = true,
                 IsLock = false,
-                PasswordHash = AsyncTools.ConvertToSync(() => SquirrelHashSystem.EncryptAsync("admin")),
+                PasswordHash = AsyncTools.ConvertToSync(() => GamepadHashSystem.EncryptAsync("admin")),
                 Username = "admin",
                 Roles = new List<Role>
                 {
-                    new Role {Name = "superadmin"}
+                    role ?? new Role {Name = "superadmin"}
                 }
             };
             context.Users.Add(adminUser);

@@ -34,20 +34,6 @@ namespace Gamepad.Test
             Console.WriteLine(Regex.IsMatch(st, @"^[a-z0-9._%=-]+@[a-z0-9.-]+\.[A-Za-z]{2,4}$"));
         }
 
-        [TestMethod]
-        public void AddUser()
-        {
-            var mytest = new Mytest();
-            mytest.AddUser();
-        }
-
-        [TestMethod]
-        public void AddRole()
-        {
-            var mytest = new Mytest();
-            mytest.AddRole();
-        }
-
 
     }
 }

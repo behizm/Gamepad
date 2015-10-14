@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,15 +18,23 @@ namespace Gamepad.Service.Data.Entities
         [StringLength(100)]
         public string Company { get; set; }
 
+        [StringLength(50)]
+        public string Alias { get; set; }
+
         [StringLength(300)]
         public string Website { get; set; }
 
         public ProfileType ProfileType { get; set; }
 
+        public short TrustRateAverage { get; set; }
+
+
 
         [Key, ForeignKey("User")]
         public Guid UserId { get; set; }
         public virtual User User { get; set; }
+
+        public virtual ICollection<TrustRate> TrustRates { get; set; }
     }
 
     public enum ProfileType

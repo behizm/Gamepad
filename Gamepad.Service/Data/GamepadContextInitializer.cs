@@ -1,7 +1,4 @@
 ﻿using System.Data.Entity;
-using Gamepad.Service.Data.Entities;
-using Gamepad.Service.Liberary;
-using Gamepad.Utility.Async;
 
 namespace Gamepad.Service.Data
 {

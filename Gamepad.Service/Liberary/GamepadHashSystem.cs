@@ -4,7 +4,7 @@ using Gamepad.Utility.Cryptography;
 
 namespace Gamepad.Service.Liberary
 {
-    public class SquirrelHashSystem
+    class GamepadHashSystem
     {
         public static async Task<string> EncryptAsync(string code)
         {
