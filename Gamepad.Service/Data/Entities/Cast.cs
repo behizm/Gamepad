@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class Cast : BaseEntity
+    public class Cast : BaseEntity
     {
         public CastType CastType { get; set; }
 

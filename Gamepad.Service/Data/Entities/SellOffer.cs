@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class SellOffer : BaseEntity
+    public class SellOffer : BaseEntity
     {
         public int Price { get; set; }
 

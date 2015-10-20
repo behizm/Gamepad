@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class Genre : BaseEntity
+    public class Genre : BaseEntity
     {
         [Required, StringLength(25, MinimumLength = 2)]
         public string Name { get; set; }

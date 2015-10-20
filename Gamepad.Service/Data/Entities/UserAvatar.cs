@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class UserAvatar
+    public class UserAvatar
     {
         [Key, ForeignKey("User")]
         public Guid UserId { get; set; }

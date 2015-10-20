@@ -13,6 +13,5 @@ E:\GitHub\Gamepad\Gamepad\Gamepad.Utility\bin\Debug\System.Web.Razor.xml
 E:\GitHub\Gamepad\Gamepad\Gamepad.Utility\bin\Debug\System.Web.WebPages.xml
 E:\GitHub\Gamepad\Gamepad\Gamepad.Utility\bin\Debug\System.Web.WebPages.Deployment.xml
 E:\GitHub\Gamepad\Gamepad\Gamepad.Utility\bin\Debug\System.Web.WebPages.Razor.xml
-E:\GitHub\Gamepad\Gamepad\Gamepad.Utility\obj\Debug\Gamepad.Utility.csprojResolveAssemblyReference.cache
 E:\GitHub\Gamepad\Gamepad\Gamepad.Utility\obj\Debug\Gamepad.Utility.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Utility\obj\Debug\Gamepad.Utility.pdb

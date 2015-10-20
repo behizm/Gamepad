@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class UserReview : BaseEntity
+    public class UserReview : BaseEntity
     {
         [StringLength(500, MinimumLength = 50)]
         public string Description { get; set; }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class PollChoice : BaseEntity
+    public class PollChoice : BaseEntity
     {
         [Required, StringLength(200)]
         public string Title { get; set; }

@@ -27,3 +27,6 @@ E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.pdb
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\System.Web.Helpers.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\System.Web.Helpers.xml
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Resources.ErrorMessages.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changeUserEnt.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changefileentity.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changeuserentity.resources

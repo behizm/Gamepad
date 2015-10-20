@@ -66,7 +66,7 @@ namespace Gamepad.Service.Data
             {
                 AccessFailed = 0,
                 Email = "behnam.zeighami@gmail.com",
-                IsActive = true,
+                IsEmailConfirmed = true,
                 IsLock = false,
                 PasswordHash = AsyncTools.ConvertToSync(() => GamepadHashSystem.EncryptAsync("admin")),
                 Username = "admin",

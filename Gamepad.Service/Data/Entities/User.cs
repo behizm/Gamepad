@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class User : BaseEntity
+    public class User : BaseEntity
     {
         [Required, StringLength(25, MinimumLength = 5)]
         [RegularExpression("^[a-z0-9._-]{5,25}$")]
@@ -15,13 +15,9 @@ namespace Gamepad.Service.Data.Entities
         [RegularExpression(@"^[a-z0-9._%=-]+@[a-z0-9.-]+\.[A-Za-z]{2,4}$")]
         public string Email { get; set; }
 
-        [StringLength(15)]
-        [RegularExpression(@"^\d{12}$")]
-        public string Mobile { get; set; }
+        public bool IsEmailConfirmed { get; set; }
 
         public string PasswordHash { get; set; }
-
-        public bool IsActive { get; set; }
 
         public short AccessFailed { get; set; }
 
@@ -29,10 +25,10 @@ namespace Gamepad.Service.Data.Entities
 
         public DateTime? LockedDate { get; set; }
 
+        public DateTime? LastLoginDate { get; set; }
 
 
-        [ForeignKey("Avatar")]
-        public Guid? AvatarId { get; set; }
+
         public virtual UserAvatar Avatar { get; set; }
 
         public virtual Profile Profile { get; set; }

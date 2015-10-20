@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class UserReviewLike : BaseEntity
+    public class UserReviewLike : BaseEntity
     {
         public bool Like { get; set; }
 

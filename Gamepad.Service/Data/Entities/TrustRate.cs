@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class TrustRate : BaseEntity
+    public class TrustRate : BaseEntity
     {
         public short Rate { get; set; }
 

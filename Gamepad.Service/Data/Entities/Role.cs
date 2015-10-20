@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class Role : BaseEntity
+    public class Role : BaseEntity
     {
         [Required, StringLength(50)]
         public string Name { get; set; }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class Profile
+    public class Profile
     {
         public DateTime CreateDate { get; set; }
 

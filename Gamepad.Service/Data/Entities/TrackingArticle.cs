@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class TrackingArticle : BaseEntity
+    public class TrackingArticle : BaseEntity
     {
         [ForeignKey("Article")]
         public Guid ArticleId { get; set; }

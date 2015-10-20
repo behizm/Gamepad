@@ -61,6 +61,15 @@ namespace Gamepad.Service.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to این نوع فایل قابل قبول نیست..
+        /// </summary>
+        public static string Services_File_UnacceptableFileType {
+            get {
+                return ResourceManager.GetString("Services_File_UnacceptableFileType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اطلاعاتی ورودی نادرست است..
         /// </summary>
         public static string Services_General_InputData {
@@ -79,11 +88,137 @@ namespace Gamepad.Service.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to آواتار وجود ندارد..
+        /// </summary>
+        public static string Services_User_AvatarNotFound {
+            get {
+                return ResourceManager.GetString("Services_User_AvatarNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to این آدرس ایمیل قبلا ثبت شده است..
+        /// </summary>
+        public static string Services_User_EmailExisted {
+            get {
+                return ResourceManager.GetString("Services_User_EmailExisted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پسورد درست نیست..
+        /// </summary>
+        public static string Services_User_InvalidPassword {
+            get {
+                return ResourceManager.GetString("Services_User_InvalidPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اطلاعات پروفایل قابل قبول نیست..
+        /// </summary>
+        public static string Services_User_ProfileInvalidData {
+            get {
+                return ResourceManager.GetString("Services_User_ProfileInvalidData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پروفایلی برای این کاربر ثبت نشده است..
+        /// </summary>
+        public static string Services_User_ProfileNotFound {
+            get {
+                return ResourceManager.GetString("Services_User_ProfileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to این کاربر تائید نشده است..
+        /// </summary>
+        public static string Services_User_Unconfirmed {
+            get {
+                return ResourceManager.GetString("Services_User_Unconfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to این اطلاعات قبلا ثبت شده است..
         /// </summary>
         public static string Services_User_UserExisted {
             get {
                 return ResourceManager.GetString("Services_User_UserExisted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to این نام کاربری قفل است..
+        /// </summary>
+        public static string Services_User_UserIsLocked {
+            get {
+                return ResourceManager.GetString("Services_User_UserIsLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to این نام کاربری قبلا ثبت شده است..
+        /// </summary>
+        public static string Services_User_UsernameExisted {
+            get {
+                return ResourceManager.GetString("Services_User_UsernameExisted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کاربری یافت نشد..
+        /// </summary>
+        public static string Services_User_UserNotFound {
+            get {
+                return ResourceManager.GetString("Services_User_UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} را به درستی وارد کنید..
+        /// </summary>
+        public static string Validation_General_RegularExperssion {
+            get {
+                return ResourceManager.GetString("Validation_General_RegularExperssion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} را وارد کنید..
+        /// </summary>
+        public static string Validation_General_Required {
+            get {
+                return ResourceManager.GetString("Validation_General_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حداکثر می تواند {1} کارکتر داشته باشد..
+        /// </summary>
+        public static string Validation_General_StringLength {
+            get {
+                return ResourceManager.GetString("Validation_General_StringLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حداقل {2} و حداکثر {1} کارکتر قابل قبول است..
+        /// </summary>
+        public static string Validation_General_StringLengthBound {
+            get {
+                return ResourceManager.GetString("Validation_General_StringLengthBound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پسورد با تکرار آن منطبق نیست..
+        /// </summary>
+        public static string Validation_User_ComparePass {
+            get {
+                return ResourceManager.GetString("Validation_User_ComparePass", resourceCulture);
             }
         }
     }

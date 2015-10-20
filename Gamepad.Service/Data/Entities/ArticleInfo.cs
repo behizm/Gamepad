@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class ArticleInfo
+    public class ArticleInfo
     {
         [Required]
         public string Description { get; set; }

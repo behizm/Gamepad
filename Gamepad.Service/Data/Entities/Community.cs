@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class Community : BaseEntity
+    public class Community : BaseEntity
     {
         [Required, StringLength(500, MinimumLength = 2)]
         public string Body { get; set; }

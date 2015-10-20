@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal abstract class BaseEntity
+    public abstract class BaseEntity
     {
         protected BaseEntity()
         {

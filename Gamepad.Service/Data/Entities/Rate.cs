@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class Rate : BaseEntity
+    public class Rate : BaseEntity
     {
         public RateSource RateSource { get; set; }
 

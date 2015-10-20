@@ -1,6 +1,6 @@
 ﻿namespace Gamepad.Service.Data.Entities
 {
-    internal class RateContent : BaseEntity
+    public class RateContent : BaseEntity
     {
         public RateSource RateSource { get; set; }
         public RateContentValue Content { get; set; }

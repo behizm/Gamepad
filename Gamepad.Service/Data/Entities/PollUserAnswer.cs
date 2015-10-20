@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class PollUserAnswer : BaseEntity
+    public class PollUserAnswer : BaseEntity
     {
         [Required, StringLength(15, MinimumLength = 7)]
         public string ParticipantIp { get; set; }

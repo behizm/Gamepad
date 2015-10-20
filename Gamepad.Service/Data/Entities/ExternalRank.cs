@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class ExternalRank : BaseEntity
+    public class ExternalRank : BaseEntity
     {
         public ExternalRankType Type { get; set; }
 

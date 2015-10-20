@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class PostContent
+    public class PostContent
     {
         public string Content { get; set; }
 

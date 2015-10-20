@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class Post : BaseEntity
+    public class Post : BaseEntity
     {
         [Required, StringLength(200, MinimumLength = 4)]
         public string Title { get; set; }

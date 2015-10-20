@@ -2,7 +2,7 @@
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class PostTag : BaseEntity
+    public class PostTag : BaseEntity
     {
         [Required, StringLength(30)]
         public string Name { get; set; }

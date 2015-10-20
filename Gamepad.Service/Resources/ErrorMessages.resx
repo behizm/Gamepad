@@ -123,7 +123,52 @@
   <data name="Services_General_OperationError" xml:space="preserve">
     <value>در هنگام انجام درخواست خطا رخ داد.</value>
   </data>
+  <data name="Services_User_InvalidPassword" xml:space="preserve">
+    <value>پسورد درست نیست.</value>
+  </data>
   <data name="Services_User_UserExisted" xml:space="preserve">
     <value>این اطلاعات قبلا ثبت شده است.</value>
+  </data>
+  <data name="Services_User_UserIsLocked" xml:space="preserve">
+    <value>این نام کاربری قفل است.</value>
+  </data>
+  <data name="Services_User_UsernameExisted" xml:space="preserve">
+    <value>این نام کاربری قبلا ثبت شده است.</value>
+  </data>
+  <data name="Services_User_UserNotFound" xml:space="preserve">
+    <value>کاربری یافت نشد.</value>
+  </data>
+  <data name="Validation_General_RegularExperssion" xml:space="preserve">
+    <value>{0} را به درستی وارد کنید.</value>
+  </data>
+  <data name="Validation_General_Required" xml:space="preserve">
+    <value>{0} را وارد کنید.</value>
+  </data>
+  <data name="Validation_General_StringLength" xml:space="preserve">
+    <value>حداکثر می تواند {1} کارکتر داشته باشد.</value>
+  </data>
+  <data name="Validation_General_StringLengthBound" xml:space="preserve">
+    <value>حداقل {2} و حداکثر {1} کارکتر قابل قبول است.</value>
+  </data>
+  <data name="Validation_User_ComparePass" xml:space="preserve">
+    <value>پسورد با تکرار آن منطبق نیست.</value>
+  </data>
+  <data name="Services_User_EmailExisted" xml:space="preserve">
+    <value>این آدرس ایمیل قبلا ثبت شده است.</value>
+  </data>
+  <data name="Services_User_Unconfirmed" xml:space="preserve">
+    <value>این کاربر تائید نشده است.</value>
+  </data>
+  <data name="Services_File_UnacceptableFileType" xml:space="preserve">
+    <value>این نوع فایل قابل قبول نیست.</value>
+  </data>
+  <data name="Services_User_AvatarNotFound" xml:space="preserve">
+    <value>آواتار وجود ندارد.</value>
+  </data>
+  <data name="Services_User_ProfileInvalidData" xml:space="preserve">
+    <value>اطلاعات پروفایل قابل قبول نیست.</value>
+  </data>
+  <data name="Services_User_ProfileNotFound" xml:space="preserve">
+    <value>پروفایلی برای این کاربر ثبت نشده است.</value>
   </data>
 </root>

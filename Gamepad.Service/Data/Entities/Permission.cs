@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class Permission : BaseEntity
+    public class Permission : BaseEntity
     {
         [Required, StringLength(30)]
         public string Area { get; set; }

@@ -159,11 +159,11 @@ namespace Gamepad.Service.Data
                 }
                 catch (DbEntityValidationException exception)
                 {
-                    OperationResult = OperationResult.Failed(exception.Message);
+                    OperationResult = OperationResult.Failed(exception.Message, "خطا از سمت پایگاه داده");
                 }
                 catch (Exception exception)
                 {
-                    OperationResult = OperationResult.Failed(exception.Message);
+                    OperationResult = OperationResult.Failed(exception.Message, "خطا از سمت پایگاه داده");
                 }
             });
             await task;

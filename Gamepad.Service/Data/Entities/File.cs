@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class File : BaseEntity
+    public class File : BaseEntity
     {
         [Required, StringLength(50, MinimumLength = 2)]
         public string Title { get; set; }
@@ -15,6 +15,8 @@ namespace Gamepad.Service.Data.Entities
         public int Size { get; set; }
 
         public FileType FileType { get; set; }
+
+        public FileCategory Category { get; set; }
 
         [Required]
         public string Address { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Gamepad.Service.Data.Entities
 {
-    internal class SystemRequirment : BaseEntity
+    public class SystemRequirment : BaseEntity
     {
         public bool IsMinimum { get; set; }
 
