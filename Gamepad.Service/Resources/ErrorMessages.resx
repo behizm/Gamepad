@@ -126,9 +126,6 @@
   <data name="Services_User_InvalidPassword" xml:space="preserve">
     <value>پسورد درست نیست.</value>
   </data>
-  <data name="Services_User_UserExisted" xml:space="preserve">
-    <value>این اطلاعات قبلا ثبت شده است.</value>
-  </data>
   <data name="Services_User_UserIsLocked" xml:space="preserve">
     <value>این نام کاربری قفل است.</value>
   </data>
@@ -170,5 +167,17 @@
   </data>
   <data name="Services_User_ProfileNotFound" xml:space="preserve">
     <value>پروفایلی برای این کاربر ثبت نشده است.</value>
+  </data>
+  <data name="Services_General_ItemNotFound" xml:space="preserve">
+    <value>اطلاعات مورد نظر یافت نشد.</value>
+  </data>
+  <data name="Services_General_Existed_" xml:space="preserve">
+    <value>{0} وجود دارد.</value>
+  </data>
+  <data name="Services_General_NonDeletable_" xml:space="preserve">
+    <value>{0} مورد نظر قابل حذف نیست.</value>
+  </data>
+  <data name="Services_General_NotFound_" xml:space="preserve">
+    <value>{0} مورد نظر یافت نشد.</value>
   </data>
 </root>

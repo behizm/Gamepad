@@ -2,6 +2,6 @@
 {
     public interface IBaseService<out TInterface>
     {
-        TInterface Clone();
+        TInterface Shadow();
     }
 }

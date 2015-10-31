@@ -83,9 +83,7 @@ namespace Gamepad.Service.Data
             OperationResult = OperationResult.Success;
             try
             {
-                var task = _context.Set<TEntity>().SingleAsync(predicate);
-                task.Wait();
-                return await task;
+                return await _context.Set<TEntity>().SingleAsync(predicate);
             }
             catch (Exception ex)
             {
@@ -99,9 +97,7 @@ namespace Gamepad.Service.Data
             OperationResult = OperationResult.Success;
             try
             {
-                var task = Task.Run(() => _context.Set<TEntity>().Where(predicate));
-                //task.Wait();
-                return await task;
+                return await Task.Run(() => _context.Set<TEntity>().Where(predicate));
             }
             catch (Exception ex)
             {

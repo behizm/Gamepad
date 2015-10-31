@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,7 +18,7 @@ namespace Gamepad.Service.Repositories
 {
     internal class UserService : BaseService, IUserService
     {
-        public IUserService Clone()
+        public IUserService Shadow()
         {
             return new UserService();
         }
@@ -27,14 +28,17 @@ namespace Gamepad.Service.Repositories
             if (!ValidateModel(model))
                 return OperationResult.Failed(ErrorMessages.Services_General_InputData);
 
-            var passwordHashed = await GamepadHashSystem.EncryptAsync(model.Password);
+            var passwordHashedTask = GamepadHashSystem.EncryptAsync(model.Password);
+            var userTask =
+                RepositoryContext.RetrieveAsync<User>(x => x.Username == model.Username || x.Email == model.Email);
+
+            var passwordHashed = await passwordHashedTask;
             if (passwordHashed.IsNothing())
                 return OperationResult.Failed(ErrorMessages.Services_General_OperationError);
 
-            var user =
-                await RepositoryContext.RetrieveAsync<User>(x => x.Username == model.Username || x.Email == model.Email);
+            var user = await userTask;
             if (user != null)
-                return OperationResult.Failed(ErrorMessages.Services_User_UserExisted);
+                return OperationResult.Failed(ErrorMessages.Services_General_Existed_.Fill("کاربری با این اطلاعات"));
 
             var newUser = new User
             {
@@ -57,11 +61,14 @@ namespace Gamepad.Service.Repositories
             if (model.Username == model.NewUsername)
                 return OperationResult.Success;
 
-            var user = await RepositoryContext.RetrieveAsync<User>(x => x.Username == model.Username);
+            var userTask = RepositoryContext.RetrieveAsync<User>(x => x.Username == model.Username);
+            var countTask = RepositoryContext.Shadow().CountAsync<User>(x => x.Username == model.NewUsername);
+
+            var user = await userTask;
             if (user == null)
                 return OperationResult.Failed(ErrorMessages.Services_User_UserNotFound);
 
-            var count = await RepositoryContext.CountAsync<User>(x => x.Username == model.NewUsername);
+            var count = await countTask;
             if (count == null)
                 return OperationResult.Failed(ErrorMessages.Services_General_OperationError);
 
@@ -224,12 +231,12 @@ namespace Gamepad.Service.Repositories
             return RepositoryContext.OperationResult;
         }
 
-        public async Task<User> GetUserByIdAsync(Guid id)
+        public async Task<User> GetByIdAsync(Guid id)
         {
             return await RepositoryContext.RetrieveAsync<User>(x => x.Id == id);
         }
 
-        public async Task<User> GetUserByUsernameAsync(UserBaseModel model)
+        public async Task<User> GetByUsernameAsync(UserBaseModel model)
         {
             if (!ValidateModel(model))
                 return null;
@@ -237,7 +244,7 @@ namespace Gamepad.Service.Repositories
             return await RepositoryContext.RetrieveAsync<User>(x => x.Username == model.Username);
         }
 
-        public async Task<User> GetUserByEmailAsync(UserEmailModel model)
+        public async Task<User> GetByEmailAsync(UserEmailModel model)
         {
             if (!ValidateModel(model))
                 return null;
@@ -272,8 +279,15 @@ namespace Gamepad.Service.Repositories
                     (!model.ProfileType.HasValue || (u.Profile != null && u.Profile.ProfileType == model.ProfileType));
             }
 
-            var result = await RepositoryContext.SearchAsync(expression);
+            var resultT = RepositoryContext.SearchAsync(expression);
+            var countT = RepositoryContext.Shadow().CountAsync(expression);
+
+            var result = await resultT;
             if (result == null)
+                return null;
+            
+            var count = await countT;
+            if (count == null)
                 return null;
 
             var rvalue = new Cluster<User>();
@@ -300,10 +314,6 @@ namespace Gamepad.Service.Repositories
             {
                 return null;
             }
-
-            var count = await RepositoryContext.CountAsync(expression);
-            if (count == null)
-                return null;
 
             rvalue.CountAll = count.Value;
             return rvalue;
@@ -364,7 +374,7 @@ namespace Gamepad.Service.Repositories
                     Company = model.Company,
                     CreateDate = DateTime.Now,
                     Firstname = model.Firstname,
-                    Lastname= model.Lastname,
+                    Lastname = model.Lastname,
                     ProfileType = ProfileType.Actual,
                     UserId = user.Id,
                     Website = model.Website,
@@ -402,6 +412,130 @@ namespace Gamepad.Service.Repositories
             user.Profile.ProfileType = model.ProfileType;
             await RepositoryContext.UpdateAsync(user.Profile);
             return RepositoryContext.OperationResult;
+        }
+
+        public async Task<OperationResult> ChangeTrustRateAsync(ProfileChangeTrustRateModel model)
+        {
+            if (!ValidateModel(model))
+                return OperationResult.Failed(ErrorMessages.Services_General_InputData);
+
+            var userTask = RepositoryContext.Shadow().RetrieveAsync<User>(u => u.Username == model.Username);
+            var profileTask = RepositoryContext.RetrieveAsync<Profile>(p => p.UserId == model.ProfileId);
+
+            var user = await userTask;
+            if (user == null)
+                return OperationResult.Failed(ErrorMessages.Services_User_UserNotFound);
+
+            var profile = await profileTask;
+            if (profile == null || profile.ProfileType != ProfileType.Legal)
+                return OperationResult.Failed(ErrorMessages.Services_User_ProfileNotFound);
+
+            var tRate = await RepositoryContext.RetrieveAsync<TrustRate>(t => t.UserId == user.Id && t.ProfileId == model.ProfileId);
+            if (tRate == null)
+            {
+                var rate = new TrustRate
+                {
+                    Comment = model.Comment,
+                    ProfileId = model.ProfileId,
+                    Rate = model.Rate,
+                    UserId = user.Id
+                };
+                WarehouseContext.Create(rate);
+            }
+            else
+            {
+                tRate.Rate = model.Rate;
+                tRate.Comment = model.Comment;
+                WarehouseContext.Update(tRate);
+            }
+
+            var average = (short)
+                (profile.TrustRates.Sum(t => t.Rate) / profile.TrustRates.Count());
+            profile.TrustRateAverage = average;
+            WarehouseContext.Update(profile);
+
+            await WarehouseContext.SaveChangesAsync();
+            return WarehouseContext.OperationResult;
+        }
+
+        public async Task<TrustRate> GetUserTrustRatingAsync(ProfileTrustRateModel model)
+        {
+            if (!ValidateModel(model))
+                return null;
+
+            var user = await RepositoryContext.RetrieveAsync<User>(u => u.Username == model.Username);
+            if (user == null)
+                return null;
+
+            return await
+                RepositoryContext.RetrieveAsync<TrustRate>(
+                    t => t.UserId == user.Id && t.ProfileId == model.ProfileId);
+
+        }
+
+        public async Task<OperationResult> AddToRoleAsync(RoleUserModel model)
+        {
+            if (!ValidateModel(model))
+                return OperationResult.Failed(ErrorMessages.Services_General_InputData);
+
+            var roleTask = RepositoryContext.RetrieveAsync<Role>(x => x.Name == model.Rolename);
+            var role = await roleTask;
+            if (role == null)
+                return OperationResult.Failed(ErrorMessages.Services_General_NotFound_.Fill("نقش"));
+
+            var userTask = RepositoryContext.RetrieveAsync<User>(x => x.Username == model.Username);
+            var user = await userTask;
+            if (user == null)
+                return OperationResult.Failed(ErrorMessages.Services_General_NotFound_.Fill("کاربر"));
+
+            if (role.Users.Any(u => u == user))
+                return OperationResult.Success;
+
+            role.Users.Add(user);
+            await RepositoryContext.UpdateAsync(role);
+            return RepositoryContext.OperationResult;
+        }
+
+        public async Task<OperationResult> RemoveFromRoleAsync(RoleUserModel model)
+        {
+            if (!ValidateModel(model))
+                return OperationResult.Failed(ErrorMessages.Services_General_InputData);
+
+            var roleTask = RepositoryContext.RetrieveAsync<Role>(x => x.Name == model.Rolename);
+            var role = await roleTask;
+            if (role == null)
+                return OperationResult.Failed(ErrorMessages.Services_General_NotFound_.Fill("نقش"));
+
+            var userTask = RepositoryContext.RetrieveAsync<User>(x => x.Username == model.Username);
+            var user = await userTask;
+            if (user == null)
+                return OperationResult.Failed(ErrorMessages.Services_General_NotFound_.Fill("کاربر"));
+
+            if (role.Users.All(u => u != user))
+                return OperationResult.Success;
+
+            role.Users.Remove(user);
+            await RepositoryContext.UpdateAsync(role);
+            return RepositoryContext.OperationResult;
+        }
+
+        public async Task<bool?> IsInRoleAsync(RoleUserModel model)
+        {
+            if (!ValidateModel(model))
+                return null;
+
+            var roleTask = RepositoryContext.RetrieveAsync<Role>(x => x.Name == model.Rolename);
+            var userTask = RepositoryContext.Shadow().RetrieveAsync<User>(x => x.Username == model.Username);
+
+            var role = await roleTask;
+            if (role == null)
+                return null;
+
+            var user = await userTask;
+            if (user == null)
+                return null;
+
+            return role.Users.Any(u => u.Id == user.Id);
         }
     }
 }

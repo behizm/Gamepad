@@ -17,12 +17,17 @@ namespace Gamepad.Service.Interfaces
         Task<OperationResult> ValidatePasswordAsync(UserValidatePassModel model);
         Task<OperationResult> ChangeEmailConfirmedAsync(UserActiveModel model);
         Task<OperationResult> ChangeLockAsync(UserLockModel model);
-        Task<User> GetUserByIdAsync(Guid id);
-        Task<User> GetUserByUsernameAsync(UserBaseModel username);
-        Task<User> GetUserByEmailAsync(UserEmailModel email);
+        Task<User> GetByIdAsync(Guid id);
+        Task<User> GetByUsernameAsync(UserBaseModel username);
+        Task<User> GetByEmailAsync(UserEmailModel email);
         Task<Cluster<User>> SearchAsync<TOrderingKey>(UserSearchModel model, Ordering<User, TOrderingKey> ordering);
         Task<OperationResult<string>> ChangeAvatarAsync(UserAvatarModel model);
         Task<OperationResult> EditProfileAsync(ProfileAddModel model);
         Task<OperationResult> ChangeProfileTypeAsync(ProfileChangeTypeModel model);
+        Task<OperationResult> ChangeTrustRateAsync(ProfileChangeTrustRateModel model);
+        Task<TrustRate> GetUserTrustRatingAsync(ProfileTrustRateModel model);
+        Task<OperationResult> AddToRoleAsync(RoleUserModel model);
+        Task<OperationResult> RemoveFromRoleAsync(RoleUserModel model);
+        Task<bool?> IsInRoleAsync(RoleUserModel model);
     }
 }

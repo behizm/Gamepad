@@ -70,11 +70,47 @@ namespace Gamepad.Service.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} وجود دارد..
+        /// </summary>
+        public static string Services_General_Existed_ {
+            get {
+                return ResourceManager.GetString("Services_General_Existed_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اطلاعاتی ورودی نادرست است..
         /// </summary>
         public static string Services_General_InputData {
             get {
                 return ResourceManager.GetString("Services_General_InputData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اطلاعات مورد نظر یافت نشد..
+        /// </summary>
+        public static string Services_General_ItemNotFound {
+            get {
+                return ResourceManager.GetString("Services_General_ItemNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} مورد نظر قابل حذف نیست..
+        /// </summary>
+        public static string Services_General_NonDeletable_ {
+            get {
+                return ResourceManager.GetString("Services_General_NonDeletable_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} مورد نظر یافت نشد..
+        /// </summary>
+        public static string Services_General_NotFound_ {
+            get {
+                return ResourceManager.GetString("Services_General_NotFound_", resourceCulture);
             }
         }
         
@@ -138,15 +174,6 @@ namespace Gamepad.Service.Resources {
         public static string Services_User_Unconfirmed {
             get {
                 return ResourceManager.GetString("Services_User_Unconfirmed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to این اطلاعات قبلا ثبت شده است..
-        /// </summary>
-        public static string Services_User_UserExisted {
-            get {
-                return ResourceManager.GetString("Services_User_UserExisted", resourceCulture);
             }
         }
         

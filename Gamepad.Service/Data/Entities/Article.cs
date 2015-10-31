@@ -12,7 +12,7 @@ namespace Gamepad.Service.Data.Entities
 
         [Required, StringLength(100, MinimumLength = 2)]
         public string Name { get; set; }
-
+         
         public ArticleType Type { get; set; }
 
         public DateTime? EditDate { get; set; }

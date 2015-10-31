@@ -77,8 +77,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IArticleService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IBaseService.cs" />
+    <Compile Include="Interfaces\IPermissionService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Migrations\201510191003232_changeUserEnt.cs" />
     <Compile Include="Migrations\201510191003232_changeUserEnt.Designer.cs">
@@ -92,9 +94,19 @@
     <Compile Include="Migrations\201510200800108_changeuserentity.Designer.cs">
       <DependentUpon>201510200800108_changeuserentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510210712122_changeProfile.cs" />
+    <Compile Include="Migrations\201510210712122_changeProfile.Designer.cs">
+      <DependentUpon>201510210712122_changeProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModels\ArticleModels.cs" />
     <Compile Include="Models\ViewModels\FileModels.cs" />
+    <Compile Include="Interfaces\IRoleService.cs" />
     <Compile Include="Models\ViewModels\ProfileModels.cs" />
+    <Compile Include="Models\ViewModels\RoleModels.cs" />
+    <Compile Include="Repositories\ArticleService.cs" />
     <Compile Include="Repositories\FileService.cs" />
+    <Compile Include="Repositories\PermissionService.cs" />
+    <Compile Include="Repositories\RoleService.cs" />
     <Compile Include="Resources\ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -176,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510200800108_changeuserentity.resx">
       <DependentUpon>201510200800108_changeuserentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510210712122_changeProfile.resx">
+      <DependentUpon>201510210712122_changeProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ErrorMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -30,3 +30,4 @@ E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Resources.Er
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changeUserEnt.resources
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changefileentity.resources
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changeuserentity.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changeProfile.resources

@@ -26,8 +26,8 @@ namespace Gamepad.Test
         {
             var result = Services.User.AddUserAsync(new UserAddModel
             {
-                Email = "test@yahoo.com",
-                Username = "test1",
+                Email = "test2@yahoo.com",
+                Username = "test2",
                 Password = "123456"
             }).Result;
             Assert.IsTrue(result.Succeeded, result.Errors != null ? result.Errors.FirstOrDefault() : string.Empty);
@@ -38,8 +38,8 @@ namespace Gamepad.Test
         {
             var result = Services.User.ChangeUsernameAsync(new UserChangeUsernameModel
             {
-                Username = "behi8303",
-                NewUsername = "behi8303",
+                Username = "test2",
+                NewUsername = "test3",
             }).Result;
             Assert.IsTrue(result.Succeeded, result.Errors != null ? result.Errors.FirstOrDefault() : string.Empty);
         }
@@ -113,19 +113,19 @@ namespace Gamepad.Test
         [TestMethod]
         public void GetUser()
         {
-            var result = Services.User.GetUserByUsernameAsync(new UserBaseModel
+            var result = Services.User.GetByUsernameAsync(new UserBaseModel
             {
                 Username = "behi8303",
             }).Result;
             Assert.IsNotNull(result);
 
-            result = Services.User.GetUserByEmailAsync(new UserEmailModel
+            result = Services.User.GetByEmailAsync(new UserEmailModel
             {
                 Email = "behi8303@yahoo.com",
             }).Result;
             Assert.IsNotNull(result);
 
-            result = Services.User.GetUserByIdAsync(result.Id).Result;
+            result = Services.User.GetByIdAsync(result.Id).Result;
             Assert.IsNotNull(result);
         }
 
@@ -156,7 +156,7 @@ namespace Gamepad.Test
             Assert.IsTrue(result.Succeeded, result.Errors != null ? result.Errors.FirstOrDefault() : string.Empty);
             Console.WriteLine(result.Value);
 
-            var user = Services.User.GetUserByUsernameAsync(new UserBaseModel
+            var user = Services.User.GetByUsernameAsync(new UserBaseModel
             {
                 Username = "behi8303"
             }).Result;
@@ -177,7 +177,7 @@ namespace Gamepad.Test
             }).Result;
             Assert.IsTrue(result.Succeeded, result.Errors != null ? result.Errors.FirstOrDefault() : string.Empty);
 
-            var user = Services.User.GetUserByUsernameAsync(new UserBaseModel
+            var user = Services.User.GetByUsernameAsync(new UserBaseModel
             {
                 Username = "behi8303"
             }).Result;
@@ -195,12 +195,78 @@ namespace Gamepad.Test
             }).Result;
             Assert.IsTrue(result.Succeeded, result.Errors != null ? result.Errors.FirstOrDefault() : string.Empty);
 
-            var user = Services.User.GetUserByUsernameAsync(new UserBaseModel
+            var user = Services.User.GetByUsernameAsync(new UserBaseModel
             {
                 Username = "behi8303"
             }).Result;
             Assert.IsNotNull(user);
             Console.WriteLine(user.Profile.ProfileType);
+        }
+
+        [TestMethod]
+        public void ChangeTrustRate()
+        {
+            var result = Services.User.ChangeTrustRateAsync(new ProfileChangeTrustRateModel
+            {
+                Username = "behizm",
+                Rate = 35,
+                Comment = "good user",
+                ProfileId = Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3")
+            }).Result;
+            Assert.IsTrue(result.Succeeded, result.Errors != null ? result.Errors.FirstOrDefault() : string.Empty);
+
+            var user = Services.User.GetByIdAsync(Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3")).Result;
+            Console.WriteLine("av : " + user.Profile.TrustRateAverage);
+            foreach (var trustRate in user.Profile.TrustRates)
+            {
+                Console.WriteLine(trustRate.Rate);
+            }
+        }
+
+        [TestMethod]
+        public void GetTrustRate()
+        {
+            var result = Services.User.GetUserTrustRatingAsync(new ProfileTrustRateModel
+            {
+                Username = "test1",
+                ProfileId = Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3")
+            }).Result;
+            Assert.IsNotNull(result);
+            Console.WriteLine(result.Rate);
+        }
+
+        [TestMethod]
+        public void AddToRole()
+        {
+            var result = Services.User.AddToRoleAsync(new RoleUserModel
+            {
+                Rolename = "FirstRole",
+                Username = "behi8303"
+            }).Result;
+            Assert.IsTrue(result.Succeeded, result.Errors != null ? result.Errors.FirstOrDefault() : string.Empty);
+        }
+
+        [TestMethod]
+        public void RemoveFromRole()
+        {
+            var result = Services.User.RemoveFromRoleAsync(new RoleUserModel
+            {
+                Rolename = "FirstRole",
+                Username = "behi8303"
+            }).Result;
+            Assert.IsTrue(result.Succeeded, result.Errors != null ? result.Errors.FirstOrDefault() : string.Empty);
+        }
+
+        [TestMethod]
+        public void IsInRole()
+        {
+            var result = Services.User.IsInRoleAsync(new RoleUserModel
+            {
+                Rolename = "FirstRole",
+                Username = "behi8303"
+            }).Result;
+            Assert.IsNotNull(result);
+            Console.WriteLine(result.Value);
         }
     }
 }

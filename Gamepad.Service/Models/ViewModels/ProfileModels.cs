@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Gamepad.Service.Data.Entities;
 using Gamepad.Service.Resources;
 
@@ -32,5 +33,19 @@ namespace Gamepad.Service.Models.ViewModels
     public class ProfileChangeTypeModel : UserBaseModel
     {
         public ProfileType ProfileType { get; set; }
+    }
+
+    public class ProfileTrustRateModel : UserBaseModel
+    {
+        public Guid ProfileId { get; set; }
+    }
+
+    public class ProfileChangeTrustRateModel : ProfileTrustRateModel
+    {
+        public short Rate { get; set; }
+
+        [Display(Name = @"توضیحات")]
+        [StringLength(500, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Validation_General_StringLength", ErrorMessage = null)]
+        public string Comment { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Gamepad.Service.Repositories
 {
     internal class FileService : BaseService, IFileService
     {
-        public IFileService Clone()
+        public IFileService Shadow()
         {
             return new FileService();
         }

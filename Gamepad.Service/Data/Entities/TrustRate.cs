@@ -13,6 +13,10 @@ namespace Gamepad.Service.Data.Entities
 
 
 
+        [ForeignKey("User")]
+        public Guid UserId { get; set; }
+        public virtual User User { get; set; }
+
         [ForeignKey("Profile")]
         public Guid ProfileId { get; set; }
         public virtual Profile Profile { get; set; }
