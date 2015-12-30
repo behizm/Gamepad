@@ -8,9 +8,11 @@ namespace Gamepad.Service.Data.Entities
     public class Post : BaseEntity
     {
         [Required, StringLength(200, MinimumLength = 4)]
+        [Index("IX_Title")]
         public string Title { get; set; }
 
         [Required, StringLength(200, MinimumLength = 4)]
+        [Index("IX_Name")]
         public string Name { get; set; }
 
         public PostType PostType { get; set; }

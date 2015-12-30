@@ -1,17 +1,16 @@
-﻿using System.Threading.Tasks;
-using Gamepad.Service.Data.Entities;
+﻿using Gamepad.Service.Data.Entities;
 using Gamepad.Service.Models.ResultModels;
 using Gamepad.Service.Models.ViewModels;
-using Gamepad.Utility.Models;
+using Gamepad.Service.Utilities.Models;
 
 namespace Gamepad.Service.Interfaces
 {
-    public interface IRoleService : IBaseService<IRoleService>
+    public interface IRoleService : IBaseService<IRoleService, Role>
     {
-        Task<OperationResult> CreateAsync(RoleBaseModel model);
-        Task<OperationResult> RenameAsync(RoleRenameModel model);
-        Task<OperationResult> DeleteAsync(RoleBaseModel model);
-        Task<Role> GetRoleByName(RoleBaseModel model);
-        Task<Cluster<Role>> SearchAsync<TOrderingKey>(RoleSearchModel model, Ordering<Role, TOrderingKey> ordering);
+        Role FindByName(string name);
+        OperationResult Insert(string roleName);
+        OperationResult Rename(string newRoleName, string oldRoleName);
+        OperationResult Delete(string roleName);
+        Cluster<Role> Search<TOrderingKey>(RoleSearchModel model, Ordering<Role, TOrderingKey> ordering);
     }
 }

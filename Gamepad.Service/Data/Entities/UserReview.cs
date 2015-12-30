@@ -9,6 +9,7 @@ namespace Gamepad.Service.Data.Entities
         [StringLength(500, MinimumLength = 50)]
         public string Description { get; set; }
 
+        [Index("IX_Score")]
         public short Score { get; set; }
 
         public int LikeCount { get; set; }

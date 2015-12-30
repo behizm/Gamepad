@@ -3,14 +3,12 @@ E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\Gamepad.Service.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\Gamepad.Service.pdb
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\EntityFramework.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\EntityFramework.SqlServer.dll
-E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\Gamepad.Utility.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\System.Web.Mvc.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\System.Web.WebPages.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\System.Web.Razor.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\System.Web.WebPages.Razor.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\Microsoft.Web.Infrastructure.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\System.Web.WebPages.Deployment.dll
-E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\Gamepad.Utility.pdb
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\EntityFramework.xml
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\EntityFramework.SqlServer.xml
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\bin\Debug\System.Web.Mvc.xml
@@ -31,3 +29,9 @@ E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.c
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changefileentity.resources
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changeuserentity.resources
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changeProfile.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changeGenre.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changeArticleCrew.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changeCascadeOption.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.systemreqChange.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.entitiesIndex.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.lastchanges.resources

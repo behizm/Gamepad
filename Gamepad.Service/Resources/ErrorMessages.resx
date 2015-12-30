@@ -118,10 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Services_General_InputData" xml:space="preserve">
-    <value>اطلاعاتی ورودی نادرست است.</value>
-  </data>
-  <data name="Services_General_OperationError" xml:space="preserve">
-    <value>در هنگام انجام درخواست خطا رخ داد.</value>
+    <value>اطلاعات ورودی نادرست است.</value>
   </data>
   <data name="Services_User_InvalidPassword" xml:space="preserve">
     <value>پسورد درست نیست.</value>
@@ -169,7 +166,7 @@
     <value>پروفایلی برای این کاربر ثبت نشده است.</value>
   </data>
   <data name="Services_General_ItemNotFound" xml:space="preserve">
-    <value>اطلاعات مورد نظر یافت نشد.</value>
+    <value>موردی یافت نشد.</value>
   </data>
   <data name="Services_General_Existed_" xml:space="preserve">
     <value>{0} وجود دارد.</value>
@@ -179,5 +176,14 @@
   </data>
   <data name="Services_General_NotFound_" xml:space="preserve">
     <value>{0} مورد نظر یافت نشد.</value>
+  </data>
+  <data name="Validation_General_Mandatory" xml:space="preserve">
+    <value>{0} را مشخص کنید.</value>
+  </data>
+  <data name="Services_General_Duplicate" xml:space="preserve">
+    <value>اطلاعات تکراری است.</value>
+  </data>
+  <data name="Services_General_OperationError" xml:space="preserve">
+    <value>خطای سیستمی رخ داد.</value>
   </data>
 </root>

@@ -9,10 +9,12 @@ namespace Gamepad.Service.Data.Entities
     {
         [Required, StringLength(25, MinimumLength = 5)]
         [RegularExpression("^[a-z0-9._-]{5,25}$")]
+        [Index("IX_Username", IsUnique = true)]
         public string Username { get; set; }
 
         [Required, StringLength(50, MinimumLength = 5)]
         [RegularExpression(@"^[a-z0-9._%=-]+@[a-z0-9.-]+\.[A-Za-z]{2,4}$")]
+        [Index("IX_Email", IsUnique = true)]
         public string Email { get; set; }
 
         public bool IsEmailConfirmed { get; set; }

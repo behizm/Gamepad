@@ -14,7 +14,7 @@ namespace Gamepad.Service.Data.Entities
         public virtual Poll Poll { get; set; }
 
         [ForeignKey("PollChoice")]
-        public Guid PollChoiceId { get; set; }
+        public Guid? PollChoiceId { get; set; }
         public virtual PollChoice PollChoice { get; set; }
 
         [ForeignKey("User")]

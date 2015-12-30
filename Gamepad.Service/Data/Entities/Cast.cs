@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
@@ -15,9 +14,7 @@ namespace Gamepad.Service.Data.Entities
         public string FaValue { get; set; }
 
 
-        [ForeignKey("Article")]
-        public Guid ArticleId { get; set; }
-        public virtual Article Article { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
     }
 
     public enum CastType

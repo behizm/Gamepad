@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using Gamepad.Service.Data.Entities;
 using Gamepad.Service.Models.ResultModels;
-using Gamepad.Service.Models.ViewModels;
 
 namespace Gamepad.Service.Interfaces
 {
-    public interface IFileService : IBaseService<IFileService>
+    public interface IFileService : IBaseService<IFileService, File>
     {
-        Task<OperationResult> AddFileAsync(FileAddModel model);
+        OperationResult Insert(File item, string username);
     }
 }

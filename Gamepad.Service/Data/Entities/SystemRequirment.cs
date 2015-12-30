@@ -1,26 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamepad.Service.Data.Entities
 {
     public class SystemRequirment : BaseEntity
     {
-        public bool IsMinimum { get; set; }
+        public SystemRequirmentType RequirmentType { get; set; }
 
-        public SystemPart SystemPart { get; set; }
+        [ForeignKey("SystemHardware")]
+        public Guid SystemHardwareId { get; set; }
+        public virtual SystemHardware SystemHardware { get; set; }
 
-        [Required, StringLength(100)]
-        public string Value { get; set; }
+        [ForeignKey("Article")]
+        public Guid ArticleId { get; set; }
+        public virtual Article Article { get; set; }
     }
 
-    public enum SystemPart
+    public enum SystemRequirmentType
     {
-        Os = 0,
-        Cpu = 1,
-        Ram = 2,
-        Vga = 3,
-        Hdd = 4,
-        DirectX = 5,
-        Psu = 6,
-        Monitor = 8
+        Minimum,
+        Recommend
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Gamepad.Service.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Gamepad.Test

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Gamepad.Service.Data.Entities;
+using Gamepad.Service.Services;
 
 namespace Gamepad.Service.Interfaces
 {
-    public interface IArticleService : IBaseService<IArticleService>
+    public interface IArticleService : IBaseService<IArticleService, Article>
     {
     }
 }

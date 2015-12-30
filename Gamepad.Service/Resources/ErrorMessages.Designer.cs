@@ -70,6 +70,15 @@ namespace Gamepad.Service.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اطلاعات تکراری است..
+        /// </summary>
+        public static string Services_General_Duplicate {
+            get {
+                return ResourceManager.GetString("Services_General_Duplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} وجود دارد..
         /// </summary>
         public static string Services_General_Existed_ {
@@ -79,7 +88,7 @@ namespace Gamepad.Service.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اطلاعاتی ورودی نادرست است..
+        ///   Looks up a localized string similar to اطلاعات ورودی نادرست است..
         /// </summary>
         public static string Services_General_InputData {
             get {
@@ -88,7 +97,7 @@ namespace Gamepad.Service.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اطلاعات مورد نظر یافت نشد..
+        ///   Looks up a localized string similar to موردی یافت نشد..
         /// </summary>
         public static string Services_General_ItemNotFound {
             get {
@@ -115,7 +124,7 @@ namespace Gamepad.Service.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to در هنگام انجام درخواست خطا رخ داد..
+        ///   Looks up a localized string similar to خطای سیستمی رخ داد..
         /// </summary>
         public static string Services_General_OperationError {
             get {
@@ -201,6 +210,15 @@ namespace Gamepad.Service.Resources {
         public static string Services_User_UserNotFound {
             get {
                 return ResourceManager.GetString("Services_User_UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} را مشخص کنید..
+        /// </summary>
+        public static string Validation_General_Mandatory {
+            get {
+                return ResourceManager.GetString("Validation_General_Mandatory", resourceCulture);
             }
         }
         

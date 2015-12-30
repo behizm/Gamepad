@@ -14,7 +14,6 @@ E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\Gamepad.Web.dll.config
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\Gamepad.Web.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\Gamepad.Web.pdb
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\Gamepad.Service.dll
-E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\Gamepad.Utility.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\Microsoft.Web.Infrastructure.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\System.Web.Helpers.dll
@@ -25,7 +24,6 @@ E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\System.Web.Webpages.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\System.Web.Webpages.Razor.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\EntityFramework.dll
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\Gamepad.Service.pdb
-E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\Gamepad.Utility.pdb
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\System.Web.Razor.xml
 E:\GitHub\Gamepad\Gamepad\Gamepad.Web\bin\System.Web.Webpages.xml

@@ -1,20 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Gamepad.Service.Models.ResultModels
 {
     public class OperationResult
     {
-        public OperationResult(params string[] errors)
+        protected OperationResult(params string[] errors)
         {
             Succeeded = false;
             Errors = errors;
         }
 
-        public OperationResult(IEnumerable<string> errors)
+        protected OperationResult(IEnumerable<string> errors)
         {
             Succeeded = false;
             Errors = errors.ToArray();
+        }
+
+        protected OperationResult(IEnumerable<string> errors, Exception exception)
+        {
+            Succeeded = false;
+            Errors = errors.ToArray();
+            Exception = exception;
         }
 
         protected OperationResult(bool succeeded)
@@ -26,13 +34,15 @@ namespace Gamepad.Service.Models.ResultModels
 
         public bool Succeeded { get; }
         public string[] Errors { get; }
+        public Exception Exception { get; }
+        public string LastError => Errors.FirstOrDefault();
 
 
         public static OperationResult Success => new OperationResult(true);
-
         public static OperationResult Failed(params string[] errors) => new OperationResult(errors);
+        public static OperationResult Failed(Exception exception, params string[] errors) => new OperationResult(errors, exception);
 
-        public OperationResult Clone() => Succeeded ? new OperationResult(true) : new OperationResult(Errors);
+        //public OperationResult Clone() => Succeeded ? new OperationResult(true) : new OperationResult(Errors);
     }
 
     public class OperationResult<T>

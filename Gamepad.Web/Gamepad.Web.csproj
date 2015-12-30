@@ -120,10 +120,6 @@
       <Project>{cb5b9f62-8ab6-446d-9d2d-018d0c9731b9}</Project>
       <Name>Gamepad.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gamepad.Utility\Gamepad.Utility.csproj">
-      <Project>{14f315fc-1b4a-459f-ad91-0c1daf058c85}</Project>
-      <Name>Gamepad.Utility</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

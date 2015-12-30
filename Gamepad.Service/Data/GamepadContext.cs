@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using Gamepad.Service.Data.Entities;
 using Gamepad.Service.Liberary;
-using Gamepad.Utility.Async;
+using Gamepad.Service.Utilities.Async;
 
 namespace Gamepad.Service.Data
 {
@@ -48,7 +47,8 @@ namespace Gamepad.Service.Data
         {
             base.OnModelCreating(modelBuilder);
             //modelBuilder.HasDefaultSchema("Blog");
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             //modelBuilder.Entity<Post>().HasMany<File>(s => s.Branches).WithMany(c => c.Users)
             //    .Map(c => c.MapLeftKey("User_id").MapRightKey("Branch_id").ToTable("UserBranches", "App"));

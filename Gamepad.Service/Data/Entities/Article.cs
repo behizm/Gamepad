@@ -8,9 +8,11 @@ namespace Gamepad.Service.Data.Entities
     public class Article : BaseEntity
     {
         [Required, StringLength(100, MinimumLength = 2)]
+        [Index("IX_Title")]
         public string Title { get; set; }
 
         [Required, StringLength(100, MinimumLength = 2)]
+        [Index("IX_Name")]
         public string Name { get; set; }
          
         public ArticleType Type { get; set; }

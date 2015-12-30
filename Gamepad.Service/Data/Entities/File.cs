@@ -28,7 +28,7 @@ namespace Gamepad.Service.Data.Entities
 
 
         [ForeignKey("Creator")]
-        public Guid CreatorId { get; set; }
+        public Guid? CreatorId { get; set; }
         public virtual User Creator { get; set; }
     }
 

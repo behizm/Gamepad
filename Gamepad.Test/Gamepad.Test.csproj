@@ -61,19 +61,19 @@
   <ItemGroup>
     <Compile Include="CommomTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FileServiceTest.cs" />
-    <Compile Include="PermissionServiceTest.cs" />
-    <Compile Include="RoleServiceTest.cs" />
-    <Compile Include="UserServiceTest.cs" />
+    <Compile Include="ServicesTests\BaseServiceTest.cs" />
+    <Compile Include="ServicesTests\SystemHardwareServiceTest.cs" />
+    <Compile Include="ServicesTests\FileServiceTest.cs" />
+    <Compile Include="ServicesTests\CastServiceTest.cs" />
+    <Compile Include="ServicesTests\PermissionServiceTest.cs" />
+    <Compile Include="ServicesTests\RoleServiceTest.cs" />
+    <Compile Include="ServicesTests\GenreServiceTest.cs" />
+    <Compile Include="ServicesTests\UserServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gamepad.Service\Gamepad.Service.csproj">
       <Project>{cb5b9f62-8ab6-446d-9d2d-018d0c9731b9}</Project>
       <Name>Gamepad.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gamepad.Utility\Gamepad.Utility.csproj">
-      <Project>{14f315fc-1b4a-459f-ad91-0c1daf058c85}</Project>
-      <Name>Gamepad.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Gamepad.Service.Data.Entities;
 using Gamepad.Service.Models.ResultModels;
 using Gamepad.Service.Models.ViewModels;
-using Gamepad.Utility.Models;
+using Gamepad.Service.Utilities.Models;
 
 namespace Gamepad.Service.Interfaces
 {
-    public interface IPermissionService : IBaseService<IPermissionService>
+    public interface IPermissionService : IBaseService<IPermissionService, Permission>
     {
-        Task<OperationResult> CreateAsync(PermissionBaseModel model);
-        Task<OperationResult> UpdateAsync(PermissionEditModel model);
-        Task<OperationResult> DeleteAsync(Guid id);
-        Task<Permission> GetByIdAsync(Guid id);
-        Task<Permission> GetByRouteAsync(PermissionBaseModel model);
-        Task<Cluster<Permission>> SearchAsync<TOrderingKey>(PermissionSearchModel model, Ordering<Permission, TOrderingKey> ordering);
-        Task<OperationResult> AddToRoleAsync(RolePermissionModel model);
-        Task<OperationResult> RemoveFromRoleAsync(RolePermissionModel model);
-        Task<bool?> IsInRoleAsync(RolePermissionModel model);
+        Permission FindByRoute(string area, string controller, string action);
+        Cluster<Permission> Search<TOrderingKey>(PermissionSearchModel model, Ordering<Permission, TOrderingKey> ordering);
+        OperationResult AddToRole(Guid permissionId, string roleName);
+        OperationResult RemoveFromRole(Guid permissionId, string roleName);
+        bool IsInRole(Guid permissionId, string roleName);
     }
 }

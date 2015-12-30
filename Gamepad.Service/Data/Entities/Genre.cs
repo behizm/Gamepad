@@ -11,7 +11,7 @@ namespace Gamepad.Service.Data.Entities
         [Required, StringLength(25, MinimumLength = 2)]
         public string FaName { get; set; }
 
-        [Required, StringLength(250)]
+        [StringLength(250)]
         public string Description { get; set; }
 
         public virtual ICollection<Article> Articles { get; set; }

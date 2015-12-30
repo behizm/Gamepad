@@ -9,6 +9,7 @@ namespace Gamepad.Service.Data.Entities
         public ExternalRankType Type { get; set; }
 
         [Range(0, 100)]
+        [Index("IX_Score")]
         public short Score { get; set; }
 
         [Required]

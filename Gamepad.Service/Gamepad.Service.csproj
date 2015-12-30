@@ -45,6 +45,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -77,42 +80,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\EventsAttribute.cs" />
+    <Compile Include="Data\Entities\SystemHardware.cs" />
     <Compile Include="Interfaces\IArticleService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IBaseService.cs" />
+    <Compile Include="Interfaces\ICastService.cs" />
+    <Compile Include="Interfaces\ISystemHardwareService.cs" />
     <Compile Include="Interfaces\IPermissionService.cs" />
+    <Compile Include="Interfaces\IGenreService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
-    <Compile Include="Migrations\201510191003232_changeUserEnt.cs" />
-    <Compile Include="Migrations\201510191003232_changeUserEnt.Designer.cs">
-      <DependentUpon>201510191003232_changeUserEnt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510200731319_changefileentity.cs" />
-    <Compile Include="Migrations\201510200731319_changefileentity.Designer.cs">
-      <DependentUpon>201510200731319_changefileentity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510200800108_changeuserentity.cs" />
-    <Compile Include="Migrations\201510200800108_changeuserentity.Designer.cs">
-      <DependentUpon>201510200800108_changeuserentity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510210712122_changeProfile.cs" />
-    <Compile Include="Migrations\201510210712122_changeProfile.Designer.cs">
-      <DependentUpon>201510210712122_changeProfile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewModels\ArticleModels.cs" />
-    <Compile Include="Models\ViewModels\FileModels.cs" />
+    <Compile Include="Models\EventArgs\UserEventArgs.cs" />
+    <Compile Include="Models\CrossModels\CastModels.cs" />
+    <Compile Include="Models\CrossModels\GenreModels.cs" />
+    <Compile Include="Models\CrossModels\ArticleModels.cs" />
     <Compile Include="Interfaces\IRoleService.cs" />
-    <Compile Include="Models\ViewModels\ProfileModels.cs" />
-    <Compile Include="Models\ViewModels\RoleModels.cs" />
-    <Compile Include="Repositories\ArticleService.cs" />
-    <Compile Include="Repositories\FileService.cs" />
-    <Compile Include="Repositories\PermissionService.cs" />
-    <Compile Include="Repositories\RoleService.cs" />
+    <Compile Include="Models\CrossModels\ProfileModels.cs" />
+    <Compile Include="Models\CrossModels\RoleModels.cs" />
+    <Compile Include="Models\CrossModels\SystemHardwareModels.cs" />
+    <Compile Include="Services\ArticleService.cs" />
+    <Compile Include="Services\EventManager.cs" />
+    <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\CastService.cs" />
+    <Compile Include="Services\PermissionService.cs" />
+    <Compile Include="Services\RoleService.cs" />
+    <Compile Include="Services\GenreService.cs" />
+    <Compile Include="Services\SystemHardwareService.cs" />
     <Compile Include="Resources\ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorMessages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services.cs" />
+    <Compile Include="GpServices.cs" />
     <Compile Include="Data\Entities\Article.cs" />
     <Compile Include="Data\Entities\ArticleInfo.cs" />
     <Compile Include="Data\Entities\BaseEntity.cs" />
@@ -144,23 +143,33 @@
     <Compile Include="Data\Entities\UserReviewLike.cs" />
     <Compile Include="Data\GamepadContext.cs" />
     <Compile Include="Data\GamepadContextInitializer.cs" />
-    <Compile Include="Data\RepositoryContext.cs" />
-    <Compile Include="Data\WarehouseContext.cs" />
+    <Compile Include="Repositories\RepositoryContext.cs" />
+    <Compile Include="Repositories\WarehouseContext.cs" />
     <Compile Include="Liberary\GamepadHashSystem.cs" />
-    <Compile Include="Migrations\201510131254222_initialCreate.cs" />
-    <Compile Include="Migrations\201510131254222_initialCreate.Designer.cs">
-      <DependentUpon>201510131254222_initialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510140553566_addselloffer.cs" />
-    <Compile Include="Migrations\201510140553566_addselloffer.Designer.cs">
-      <DependentUpon>201510140553566_addselloffer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ResultModels\OperationResult.cs" />
-    <Compile Include="Models\ViewModels\UserModels.cs" />
+    <Compile Include="Models\CrossModels\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\BaseService.cs" />
-    <Compile Include="Repositories\UserService.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Utilities\Async\AsyncTools.cs" />
+    <Compile Include="Utilities\Cryptography\Hashing.cs" />
+    <Compile Include="Utilities\Cryptography\Rsa.cs" />
+    <Compile Include="Utilities\Cryptography\RsaKeyModel.cs" />
+    <Compile Include="Utilities\Cryptography\Symmetric.cs" />
+    <Compile Include="Utilities\FarsiTools\FarsiDigit.cs" />
+    <Compile Include="Utilities\FarsiTools\PersianBoolean.cs" />
+    <Compile Include="Utilities\FarsiTools\PersianDate.cs" />
+    <Compile Include="Utilities\Helpers\EnumExtensions.cs" />
+    <Compile Include="Utilities\Helpers\HtmlHelpers.cs" />
+    <Compile Include="Utilities\Helpers\NumberExtensions.cs" />
+    <Compile Include="Utilities\Helpers\SelectListExtensions.cs" />
+    <Compile Include="Utilities\Helpers\StringExtensions.cs" />
+    <Compile Include="Utilities\Models\ClusterModel.cs" />
+    <Compile Include="Utilities\Models\DateSliceModel.cs" />
+    <Compile Include="Utilities\Models\OrderingModels.cs" />
+    <Compile Include="Utilities\Rss\RssActionResult.cs" />
+    <Compile Include="Utilities\Xml\XmlReadService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -168,30 +177,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gamepad.Utility\Gamepad.Utility.csproj">
-      <Project>{14f315fc-1b4a-459f-ad91-0c1daf058c85}</Project>
-      <Name>Gamepad.Utility</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510131254222_initialCreate.resx">
-      <DependentUpon>201510131254222_initialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510140553566_addselloffer.resx">
-      <DependentUpon>201510140553566_addselloffer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510191003232_changeUserEnt.resx">
-      <DependentUpon>201510191003232_changeUserEnt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510200731319_changefileentity.resx">
-      <DependentUpon>201510200731319_changefileentity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510200800108_changeuserentity.resx">
-      <DependentUpon>201510200800108_changeuserentity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510210712122_changeProfile.resx">
-      <DependentUpon>201510210712122_changeProfile.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ErrorMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>

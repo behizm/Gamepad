@@ -2,7 +2,6 @@ using System.Data.Entity.Migrations;
 using Gamepad.Service.Data;
 using Gamepad.Service.Data.Entities;
 using Gamepad.Service.Liberary;
-using Gamepad.Utility.Async;
 
 namespace Gamepad.Service.Migrations
 {
