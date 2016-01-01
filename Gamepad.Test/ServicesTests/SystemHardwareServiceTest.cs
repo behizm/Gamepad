@@ -30,6 +30,8 @@ namespace Gamepad.Test.ServicesTests
                 Name = "GeForce Gtx 980"
             });
             Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.SystemHardware.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
         [TestMethod]
@@ -68,6 +70,8 @@ namespace Gamepad.Test.ServicesTests
             hardware.Name = "GeForce Gtx 980 Ti";
             var editResult = GpServices.SystemHardware.Update(hardware);
             Assert.IsTrue(editResult.Succeeded, editResult.LastError);
+            editResult = GpServices.SystemHardware.SaveChanges();
+            Assert.IsTrue(editResult.Succeeded, editResult.LastError);
         }
 
         [TestMethod]
@@ -85,6 +89,8 @@ namespace Gamepad.Test.ServicesTests
             Assert.IsTrue(result.CountAll > 0);
             var hardware = GpServices.SystemHardware.FindById(result.List.First().Id);
             var removeResult = GpServices.SystemHardware.Delete(hardware.Id);
+            Assert.IsTrue(removeResult.Succeeded, removeResult.LastError);
+            removeResult = GpServices.SystemHardware.SaveChanges();
             Assert.IsTrue(removeResult.Succeeded, removeResult.LastError);
         }
     }

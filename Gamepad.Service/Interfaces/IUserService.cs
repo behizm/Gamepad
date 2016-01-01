@@ -9,17 +9,22 @@ namespace Gamepad.Service.Interfaces
 {
     public interface IUserService : IBaseService<IUserService, User>
     {
+        int MaxAccessFailed { get; }
         User FindByUsername(string username);
         User FindByEmail(string email);
         bool ValidateUser(string userword);
         bool ValidateUserData(string username, string email);
-        bool ValidateLogin(string userword, string password);
+        bool ValidateUserPassword(string userword, string password);
+        OperationResult ValidateLogin(string userword);
+        OperationResult ValidateLogin(string userword, string password);
         OperationResult Insert(User user, string password);
         OperationResult ChangeUsername(string newUsername, string oldUsername);
         OperationResult ChangeEmail(string username, string email);
         OperationResult ChangePassword(string username, string oldPassword, string newPassword);
+        OperationResult ResetPassword(string username, string password);
         OperationResult ChangeEmailConfirmed(string username, bool confirmValue);
         OperationResult ChangeLock(string username, bool lockValue);
+        OperationResult AccessFailed(User user);
         Cluster<User> Search<TOrderingKey>(UserSearchModel model, Ordering<User, TOrderingKey> ordering);
 
         OperationResult AddToRole(string username, string roleName);

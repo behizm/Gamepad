@@ -32,6 +32,8 @@ namespace Gamepad.Test.ServicesTests
                 Description = "my movie genre"
             });
             Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.Genre.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
             Console.WriteLine(@"add test success.");
 
             Console.WriteLine(@"find by name test start ...");
@@ -56,6 +58,8 @@ namespace Gamepad.Test.ServicesTests
             genre.FaName = "درام خودم";
             result = GpServices.Genre.Update(genre);
             Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.Genre.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
             Console.WriteLine(@"update test success.");
 
             Console.WriteLine(@"search test start ...");
@@ -69,7 +73,9 @@ namespace Gamepad.Test.ServicesTests
 
             Console.WriteLine(@"remove test start ...");
             result = GpServices.Genre.Delete(genre.Id);
-            Assert.IsTrue(result.Succeeded, result.Errors.Any() ? result.Errors.Last() : string.Empty);
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.Genre.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
             Console.WriteLine(@"remove test success.");
         }
     }

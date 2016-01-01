@@ -124,7 +124,7 @@
     <value>پسورد درست نیست.</value>
   </data>
   <data name="Services_User_UserIsLocked" xml:space="preserve">
-    <value>این نام کاربری قفل است.</value>
+    <value>نام کاربری قفل شده است.</value>
   </data>
   <data name="Services_User_UsernameExisted" xml:space="preserve">
     <value>این نام کاربری قبلا ثبت شده است.</value>
@@ -151,7 +151,7 @@
     <value>این آدرس ایمیل قبلا ثبت شده است.</value>
   </data>
   <data name="Services_User_Unconfirmed" xml:space="preserve">
-    <value>این کاربر تائید نشده است.</value>
+    <value>کاربر تائید نشده است.</value>
   </data>
   <data name="Services_File_UnacceptableFileType" xml:space="preserve">
     <value>این نوع فایل قابل قبول نیست.</value>

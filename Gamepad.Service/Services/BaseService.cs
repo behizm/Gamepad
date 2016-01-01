@@ -126,7 +126,6 @@ namespace Gamepad.Service.Services
             catch (DbEntityValidationException exception)
             {
                 return OperationResult.Failed(exception, ErrorMessages.Services_General_OperationError);
-
             }
             catch (Exception exception)
             {

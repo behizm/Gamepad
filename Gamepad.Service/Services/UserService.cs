@@ -17,12 +17,16 @@ namespace Gamepad.Service.Services
     {
         public UserService(GamepadContext context) : base(context)
         {
+            MaxAccessFailed = 6;
         }
+
+        public int MaxAccessFailed { get; }
 
         public IUserService Clone()
         {
             return new UserService(new GamepadContext());
         }
+
 
         public User FindByUsername(string username)
         {
@@ -33,7 +37,7 @@ namespace Gamepad.Service.Services
         public User FindByEmail(string email)
         {
             email = email.ToLower();
-            return Get(x => x.Username == email);
+            return Get(x => x.Email == email);
         }
 
         public bool ValidateUser(string userword)
@@ -51,7 +55,7 @@ namespace Gamepad.Service.Services
             return user != null;
         }
 
-        public bool ValidateLogin(string userword, string password)
+        public bool ValidateUserPassword(string userword, string password)
         {
             userword = userword.ToLower();
             var passwordHashed = GamepadHashSystem.Encrypt(password);
@@ -59,11 +63,57 @@ namespace Gamepad.Service.Services
             return user != null;
         }
 
+        public OperationResult ValidateLogin(string userword)
+        {
+            userword = userword.ToLower();
+            var user = Get(x => x.Username == userword || x.Email == userword);
+            if (user == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            if (!user.IsEmailConfirmed)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_User_Unconfirmed);
+            }
+            if (user.IsLock)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_User_UserIsLocked);
+            }
+            return OperationResult.Success;
+        }
+
+        public OperationResult ValidateLogin(string userword, string password)
+        {
+            userword = userword.ToLower();
+            var user = Get(x => x.Username == userword || x.Email == userword);
+            if (user == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            if (!user.IsEmailConfirmed)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_User_Unconfirmed);
+            }
+            if (user.IsLock)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_User_UserIsLocked);
+            }
+
+            var passwordHashed = GamepadHashSystem.Encrypt(password);
+            if (passwordHashed != user.PasswordHash)
+            {
+                AccessFailed(user);
+                return OperationResult.Failed(ErrorMessages.Services_User_InvalidPassword);
+            }
+            user.LastLoginDate = DateTime.Now;
+            return Update(user);
+        }
+
         public OperationResult Insert(User user, string password)
         {
             var passwordHashed = GamepadHashSystem.Encrypt(password);
             user.PasswordHash = passwordHashed;
-            return base.Insert(user);
+            return Insert(user);
         }
 
         public override OperationResult Insert(User user)
@@ -71,7 +121,7 @@ namespace Gamepad.Service.Services
             user.Username = user.Username.ToLower();
             user.Email = user.Email.ToLower();
 
-            if (!ValidateUserData(user.Username, user.Email))
+            if (ValidateUserData(user.Username, user.Email))
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_Duplicate);
             }
@@ -101,6 +151,11 @@ namespace Gamepad.Service.Services
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
             }
+            var secondUser = FindByUsername(newUsername);
+            if (secondUser != null && user.Id != secondUser.Id)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_Duplicate);
+            }
             user.Username = newUsername;
             return Update(user);
         }
@@ -111,6 +166,11 @@ namespace Gamepad.Service.Services
             if (user == null)
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            var secondUser = FindByEmail(email);
+            if (secondUser != null && user.Id != secondUser.Id)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_Duplicate);
             }
             user.Email = email;
             return Update(user);
@@ -123,11 +183,22 @@ namespace Gamepad.Service.Services
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
             }
-            if (!ValidateLogin(username, oldPassword))
+            if (!ValidateUserPassword(username, oldPassword))
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_InputData);
             }
             user.PasswordHash = GamepadHashSystem.Encrypt(newPassword);
+            return Update(user);
+        }
+
+        public OperationResult ResetPassword(string username, string password)
+        {
+            var user = FindByUsername(username);
+            if (user == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            user.PasswordHash = GamepadHashSystem.Encrypt(password);
             return Update(user);
         }
 
@@ -149,7 +220,31 @@ namespace Gamepad.Service.Services
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
             }
+            if (lockValue)
+            {
+                user.LockedDate = DateTime.Now;
+            }
+            else
+            {
+                user.LockedDate = null;
+                user.AccessFailed = 0;
+            }
             user.IsLock = lockValue;
+            return Update(user);
+        }
+
+        public OperationResult AccessFailed(User user)
+        {
+            if (user == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            user.AccessFailed = (short)(user.AccessFailed + 1);
+            if (user.AccessFailed >= MaxAccessFailed)
+            {
+                user.IsLock = true;
+                user.LockedDate = DateTime.Now;
+            }
             return Update(user);
         }
 
@@ -181,6 +276,7 @@ namespace Gamepad.Service.Services
             }
             return Search(expression, ordering);
         }
+
 
         public OperationResult AddToRole(string username, string roleName)
         {
@@ -241,7 +337,7 @@ namespace Gamepad.Service.Services
                 return null;
             }
             var file = GpServices.File.FindById(avatarId);
-            if (file == null)
+            if (file == null || file.FileType != FileType.Image || file.Category != FileCategory.UserAvatar)
             {
                 return null;
             }
@@ -271,6 +367,8 @@ namespace Gamepad.Service.Services
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
             }
+            profile.CreateDate = DateTime.Now;
+            profile.ProfileType = ProfileType.Actual;
             user.Profile = profile;
             return Update(user);
         }
@@ -289,25 +387,34 @@ namespace Gamepad.Service.Services
         public OperationResult ChangeTrustRate(string username, TrustRate rate)
         {
             var user = FindByUsername(username);
-            if (user?.Profile == null)
+            if (user == null)
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
             }
-            var trustRate = user.Profile.TrustRates.FirstOrDefault(x => x.Id == rate.Id);
+            rate.UserId = user.Id;
+            var subjectUser = FindById(rate.ProfileId);
+            if (subjectUser?.Profile == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            var trustRate = subjectUser.Profile.TrustRates.FirstOrDefault(x => x.UserId == user.Id);
             if (trustRate == null)
             {
-                user.Profile.TrustRates.Add(rate);
-                return Update(user);
+                subjectUser.Profile.TrustRates.Add(rate);
             }
-            if (rate.Rate == trustRate.Rate || rate.Comment == trustRate.Comment)
+            else if (rate.Rate == trustRate.Rate && rate.Comment == trustRate.Comment)
             {
                 return OperationResult.Success;
             }
-            trustRate.Rate = rate.Rate;
-            trustRate.Comment = rate.Comment;
-            user.Profile.TrustRateAverage =
-                (short) (user.Profile.TrustRates.Sum(x => x.Rate)/user.Profile.TrustRates.Count());
-            return Update(user);
+            else
+            {
+                trustRate.Rate = rate.Rate;
+                trustRate.Comment = rate.Comment;
+            }
+
+            subjectUser.Profile.TrustRateAverage =
+                (short)(subjectUser.Profile.TrustRates.Sum(x => x.Rate) / subjectUser.Profile.TrustRates.Count());
+            return Update(subjectUser);
         }
 
         // events :
@@ -324,7 +431,5 @@ namespace Gamepad.Service.Services
             var handler = UserEdited;
             handler?.Invoke(this, e);
         }
-
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Gamepad.Service.Data;
@@ -87,10 +88,19 @@ namespace Gamepad.Service.Services
             if (permission == null || role == null)
                 return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
 
-            if (role.Permissions.Any(p => p.Id == permission.Id))
+            if (permission.Roles == null)
+            {
+                permission.Roles = new List<Role> { role };
+            }
+            else if (permission.Roles.Any(x => x.Id == role.Id))
+            {
                 return OperationResult.Success;
+            }
+            else
+            {
+                permission.Roles.Add(role);
+            }
 
-            permission.Roles.Add(role);
             return base.Update(permission);
         }
 
