@@ -39,19 +39,19 @@ namespace Gamepad.Service.Data.Entities
 
         public virtual ICollection<Cast> Crews { get; set; }
 
+        public virtual ICollection<File> ImageGallery { get; set; }
+
         public virtual ICollection<UserReview> UserReviews { get; set; }
 
         public virtual ICollection<ExternalRank> ExternalRates { get; set; }
 
         public virtual ICollection<Rate> Rates { get; set; }
 
-        public virtual ICollection<Post> Posts { get; set; }
-
-        public virtual ICollection<File> ImageGallery { get; set; }
-
         public virtual ICollection<SystemRequirment> SystemRequirments { get; set; }
 
         public virtual ICollection<Community> Communities { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
     }
 
     public enum ArticleType

@@ -26,30 +26,38 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.User.Insert(new User
             {
-                Email = "test13@yahoo.com",
-                Username = "test13",
+                Email = "test14@yahoo.com",
+                Username = "test14",
             }, "123456");
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.User.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
         [TestMethod]
         public void ChangeUsername()
         {
-            var result = GpServices.User.ChangeUsername("test2", "test3");
+            var result = GpServices.User.ChangeUsername("test014", "test14");
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.User.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
         [TestMethod]
         public void ChangeEmail()
         {
-            var result = GpServices.User.ChangeEmail("behi8303", "behi8303@yahoo.com");
+            var result = GpServices.User.ChangeEmail("test014", "test014@yahoo.com");
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.User.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
         [TestMethod]
         public void ChangePassword()
         {
-            var result = GpServices.User.ChangePassword("behi8303", "123456", "123456");
+            var result = GpServices.User.ChangePassword("test014", "123456", "123456789");
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.User.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -61,23 +69,39 @@ namespace Gamepad.Test.ServicesTests
         }
 
         [TestMethod]
-        public void ValidateLogin()
+        public void ValidateUserPassword()
         {
-            var result = GpServices.User.ValidateLogin("behi8303", "1234564");
+            var result = GpServices.User.ValidateUserPassword("test014", "123456789");
             Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void ChangeEmailConfirmed()
         {
-            var result = GpServices.User.ChangeEmailConfirmed("behi8303", true);
+            var result = GpServices.User.ChangeEmailConfirmed("test014", false);
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.User.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
         [TestMethod]
         public void ChangeLock()
         {
-            var result = GpServices.User.ChangeLock("behi8303", false);
+            var result = GpServices.User.ChangeLock("test014", false);
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.User.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
+        }
+
+        [TestMethod]
+        public void ValidateLogin()
+        {
+            var result = GpServices.User.ValidateLogin("test014", "123456789c");
+            if (!result.Succeeded)
+            {
+                Console.WriteLine(result.LastError);
+            }
+            result = GpServices.User.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -99,7 +123,7 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.User.Search(new UserSearchModel
             {
-                Username = ""
+                Username = "te"
             }, new Ordering<User, DateTime>
             {
                 OrderByKeySelector = x => x.CreateDate
@@ -111,21 +135,44 @@ namespace Gamepad.Test.ServicesTests
         }
 
         [TestMethod]
+        public void AddToRole()
+        {
+            var result = GpServices.User.AddToRole("test014", "FirstRole");
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.User.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
+        }
+
+        [TestMethod]
+        public void IsInRole()
+        {
+            var result = GpServices.User.IsInRole("test014", "FirstRole");
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void RemoveFromRole()
+        {
+            var result = GpServices.User.RemoveFromRole("test014", "FirstRole");
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.User.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
+        }
+
+        [TestMethod]
         public void ChangeAvatar()
         {
-            var result = GpServices.User.ChangeAvatar("behi8303", Guid.Parse("0813fff5-0345-4798-aec1-4db3570346d5"));
+            var result = GpServices.User.ChangeAvatar("test014", Guid.Parse("0813fff5-0345-4798-aec1-4db3570346d5"));
             Assert.IsNotNull(result);
             Console.WriteLine(result);
-
-            var user = GpServices.User.FindByUsername("behi8303");
-            Assert.IsNotNull(user);
-            Console.WriteLine(user.Avatar.File.Title);
+            var saveResult = GpServices.User.SaveChanges();
+            Assert.IsTrue(saveResult.Succeeded, saveResult.LastError);
         }
 
         [TestMethod]
         public void EditProfile()
         {
-            var user1 = GpServices.User.FindByUsername("behi8303");
+            var user1 = GpServices.User.FindByUsername("test014");
             Assert.IsNotNull(user1);
 
             var result = GpServices.User.UpdateProfile(new Profile
@@ -137,31 +184,30 @@ namespace Gamepad.Test.ServicesTests
                 Website = ".com"
             });
             Assert.IsTrue(result.Succeeded, result.LastError);
-
-            var user = GpServices.User.FindByUsername("behi8303");
-            Assert.IsNotNull(user);
-            Console.WriteLine(user.Profile.Firstname);
+            result = GpServices.User.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
         [TestMethod]
         public void ChangeProfileType()
         {
-            var result = GpServices.User.ChangeProfileType("behi8303", ProfileType.Legal);
+            var result = GpServices.User.ChangeProfileType("test014", ProfileType.Legal);
             Assert.IsTrue(result.Succeeded, result.LastError);
-
-            var user = GpServices.User.FindByUsername("behi8303");
-            Assert.IsNotNull(user);
-            Console.WriteLine(user.Profile.ProfileType);
+            result = GpServices.User.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
         [TestMethod]
         public void ChangeTrustRate()
         {
-            var result = GpServices.User.ChangeTrustRate("behizm", new TrustRate
+            var result = GpServices.User.ChangeTrustRate("test014", new TrustRate
             {
-                Rate = 35,
-                Comment = "good user",
+                Rate = 40,
+                Comment = "good user test14",
+                ProfileId = Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3")
             });
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.User.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
 
             var user = GpServices.User.FindById(Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3"));
@@ -170,27 +216,6 @@ namespace Gamepad.Test.ServicesTests
             {
                 Console.WriteLine(trustRate.Rate);
             }
-        }
-
-        [TestMethod]
-        public void AddToRole()
-        {
-            var result = GpServices.User.AddToRole("behi8303", "FirstRole");
-            Assert.IsTrue(result.Succeeded, result.LastError);
-        }
-
-        [TestMethod]
-        public void RemoveFromRole()
-        {
-            var result = GpServices.User.RemoveFromRole("behi8303", "FirstRole");
-            Assert.IsTrue(result.Succeeded, result.LastError);
-        }
-
-        [TestMethod]
-        public void IsInRole()
-        {
-            var result = GpServices.User.IsInRole("behi8303", "FirstRole");
-            Assert.IsTrue(result);
         }
     }
 }

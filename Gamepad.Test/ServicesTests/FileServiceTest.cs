@@ -24,13 +24,13 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.File.Insert(new File
             {
-                Size = 1,
-                Title = "vid4",
+                Size = 50,
+                Title = "vid5",
                 Category = FileCategory.ArticleVideo,
                 FileType = FileType.Video,
                 IsPublic = false,
-                Filename = "file4.jpeg",
-                Address = "address4"
+                Filename = "file5.jpeg",
+                Address = "address5"
             });
             Assert.IsTrue(result.Succeeded, result.LastError);
             result = GpServices.File.SaveChanges();

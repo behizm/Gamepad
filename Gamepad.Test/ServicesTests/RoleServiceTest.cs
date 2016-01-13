@@ -26,6 +26,8 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.Role.Insert("firstRole");
             Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.Role.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
         [TestMethod]
@@ -33,12 +35,7 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.Role.Rename("FirstRoles","FirstRole");
             Assert.IsTrue(result.Succeeded, result.LastError);
-        }
-
-        [TestMethod]
-        public void Delete()
-        {
-            var result = GpServices.Role.Delete("FirstRole");
+            result = GpServices.Role.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -55,6 +52,15 @@ namespace Gamepad.Test.ServicesTests
             Assert.IsNotNull(result);
             Console.WriteLine(result.CountAll);
             result.List.ToList().ForEach(x => Console.WriteLine(x.Name));
+        }
+
+        [TestMethod]
+        public void Delete()
+        {
+            var result = GpServices.Role.Delete("FirstRoles");
+            Assert.IsTrue(result.Succeeded, result.LastError);
+            result = GpServices.Role.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
         }
     }
 }

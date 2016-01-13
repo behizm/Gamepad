@@ -35,3 +35,28 @@ E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.c
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.systemreqChange.resources
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.entitiesIndex.resources
 E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.lastchanges.resources
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\Gamepad.Service.dll.config
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\Gamepad.Service.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\Gamepad.Service.pdb
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\EntityFramework.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\EntityFramework.SqlServer.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\Microsoft.Web.Infrastructure.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.Helpers.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.Mvc.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.Razor.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.WebPages.Deployment.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.WebPages.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.WebPages.Razor.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\EntityFramework.xml
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\EntityFramework.SqlServer.xml
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.Helpers.xml
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.Mvc.xml
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.Razor.xml
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.WebPages.xml
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.WebPages.Deployment.xml
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\bin\Debug\System.Web.WebPages.Razor.xml
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.csprojResolveAssemblyReference.cache
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Resources.ErrorMessages.resources
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.csproj.GenerateResource.Cache
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.dll
+E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.pdb

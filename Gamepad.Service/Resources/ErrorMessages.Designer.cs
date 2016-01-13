@@ -178,7 +178,7 @@ namespace Gamepad.Service.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to این کاربر تائید نشده است..
+        ///   Looks up a localized string similar to کاربر تائید نشده است..
         /// </summary>
         public static string Services_User_Unconfirmed {
             get {
@@ -187,7 +187,7 @@ namespace Gamepad.Service.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to این نام کاربری قفل است..
+        ///   Looks up a localized string similar to نام کاربری قفل شده است..
         /// </summary>
         public static string Services_User_UserIsLocked {
             get {
