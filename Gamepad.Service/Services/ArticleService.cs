@@ -1,22 +1,14 @@
 ﻿using System;
-<<<<<<< HEAD
 using Gamepad.Service.Data;
 using Gamepad.Service.Data.Entities;
 using Gamepad.Service.Interfaces;
 using Gamepad.Service.Models.ResultModels;
 using Gamepad.Service.Resources;
-=======
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Gamepad.Service.Data;
-using Gamepad.Service.Data.Entities;
-using Gamepad.Service.Interfaces;
 using Gamepad.Service.Models.CrossModels;
-using Gamepad.Service.Models.ResultModels;
-using Gamepad.Service.Resources;
 using Gamepad.Service.Utilities.Models;
->>>>>>> origin/master
 
 namespace Gamepad.Service.Services
 {
@@ -43,23 +35,13 @@ namespace Gamepad.Service.Services
             return Get(x => x.Name == name);
         }
 
-<<<<<<< HEAD
         public override OperationResult Insert(Article item)
         {
-            var title = item.Title.Trim();
-            while (title.Contains("  "))
-            {
-                title = title.Replace("  ", " ");
-            }
-            var name = title.ToLower().Replace(" ", "_");
-
-            if (FindByName(name) != null)
+            item = _normalizeArticleName(item);
+            if (FindByName(item.Name) != null)
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_Duplicate);
             }
-
-            item.Title = title;
-            item.Name = name;
             item.EditDate = null;
             item.UserScoresAverage = null;
             return base.Insert(item);
@@ -67,26 +49,17 @@ namespace Gamepad.Service.Services
 
         public override OperationResult Update(Article item)
         {
-            var title = item.Title.Trim();
-            while (title.Contains("  "))
-            {
-                title = title.Replace("  ", " ");
-            }
-            var name = title.ToLower().Replace(" ", "_");
-            var article = FindByName(name);
+            item = _normalizeArticleName(item);
+            var article = FindByName(item.Name);
             if (article.Id != item.Id)
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_Duplicate);
             }
-
-            item.Title = title;
-            item.Name = name;
+            
             item.EditDate = DateTime.Now;
             return base.Update(item);
         }
 
-        public string ChangePoster(Guid articleId, Guid posterId)
-=======
         public Cluster<Article> Search<TOrderingKey>(ArticleSearchModel model, Ordering<Article, TOrderingKey> ordering)
         {
             Expression<Func<Article, bool>> expression;
@@ -113,52 +86,27 @@ namespace Gamepad.Service.Services
             return Search(expression, ordering);
         }
 
-        public override OperationResult Insert(Article article)
-        {
-            var item =
-                Get(x => x.Name.ToLower() == article.Name.ToLower() || x.Title.ToLower() == article.Title.ToLower());
-            if (item != null)
-            {
-                return OperationResult.Failed(ErrorMessages.Services_General_Duplicate);
-            }
-            article.SiteScore = null;
-            article.UserScoresAverage = null;
-            article.EditDate = null;
-            return base.Insert(article);
-        }
-
-        public override OperationResult Update(Article article)
-        {
-            article.EditDate = DateTime.Now;
-            return base.Update(article);
-        }
-
-
-        public OperationResult ChangePoster(Guid articleId, Guid fileId)
+        public string ChangePoster(Guid articleId, Guid posterId)
         {
             var article = FindById(articleId);
             if (article == null)
             {
-                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+                return null;
             }
-            var file = GpServices.File.FindById(fileId);
+
+            var file = GpServices.File.FindById(posterId);
             if (file == null || file.FileType != FileType.Image || file.Category != FileCategory.ArticlePoster)
             {
-                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+                return null;
+            }
+
+            if (article.PosterId == file.Id)
+            {
+                return file.Address;
             }
             article.PosterId = file.Id;
-            return Update(article);
-        }
-
-        public OperationResult ChangeMoreInfo(ArticleInfo info)
-        {
-            var article = FindById(info.ArticleId);
-            if (article == null)
-            {
-                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
-            }
-            article.MoreInfo = info;
-            return Update(article);
+            article.EditDate = DateTime.Now;
+            return base.Update(article).Succeeded ? file.Address : null;
         }
 
         public OperationResult AddToGenre(Guid articleId, Guid genreId)
@@ -189,29 +137,10 @@ namespace Gamepad.Service.Services
         }
 
         public OperationResult RemoveFromGenre(Guid articleId, Guid genreId)
->>>>>>> origin/master
         {
             var article = FindById(articleId);
             if (article == null)
             {
-<<<<<<< HEAD
-                return null;
-            }
-
-            var file = GpServices.File.FindById(posterId);
-            if (file == null)
-            {
-                return null;
-            }
-
-            if (article.PosterId == file.Id)
-            {
-                return file.Address;
-            }
-            article.PosterId = file.Id;
-            article.EditDate = DateTime.Now;
-            return base.Update(article).Succeeded ? file.Address : null;
-=======
                 return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
             }
             var genre = GpServices.Genre.FindById(genreId);
@@ -272,7 +201,25 @@ namespace Gamepad.Service.Services
             }
             article.Crews.Remove(cast);
             return Update(article);
->>>>>>> origin/master
         }
+
+
+        #region Private Methods
+
+        private readonly Func<Article, Article> _normalizeArticleName = item =>
+        {
+            var title = item.Title.Trim();
+            while (title.Contains("  "))
+            {
+                title = title.Replace("  ", " ");
+            }
+            var name = title.ToLower().Replace(" ", "_");
+            item.Title = title;
+            item.Name = name;
+            return item;
+        };
+
+        #endregion
+
     }
 }
