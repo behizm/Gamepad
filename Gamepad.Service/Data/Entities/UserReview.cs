@@ -6,7 +6,7 @@ namespace Gamepad.Service.Data.Entities
 {
     public class UserReview : BaseEntity
     {
-        [StringLength(500, MinimumLength = 50)]
+        [StringLength(500, MinimumLength = 20)]
         public string Description { get; set; }
 
         [Index("IX_Score")]

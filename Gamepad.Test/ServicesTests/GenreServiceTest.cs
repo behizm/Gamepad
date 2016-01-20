@@ -22,6 +22,37 @@ namespace Gamepad.Test.ServicesTests
         }
 
         [TestMethod]
+        public void Insert()
+        {
+            var result = GpServices.Genre.Insert(new Genre
+            {
+                Name = "FPS",
+                FaName = "اول شخص",
+                Description = "first person shooter"
+            });
+            Assert.IsTrue(result.Succeeded, result.LastError);
+
+            result = GpServices.Genre.Insert(new Genre
+            {
+                Name = "Action",
+                FaName = "اکشن",
+                Description = "action game"
+            });
+            Assert.IsTrue(result.Succeeded, result.LastError);
+
+            result = GpServices.Genre.Insert(new Genre
+            {
+                Name = "Third Person",
+                FaName = "سوم شخص",
+                Description = "third person shooter"
+            });
+            Assert.IsTrue(result.Succeeded, result.LastError);
+
+            result = GpServices.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
+        }
+
+        [TestMethod]
         public void Overall()
         {
             Console.WriteLine(@"add test start ...");

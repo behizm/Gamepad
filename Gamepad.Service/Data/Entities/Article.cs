@@ -7,21 +7,33 @@ namespace Gamepad.Service.Data.Entities
 {
     public class Article : BaseEntity
     {
+        private string _title;
         [Required, StringLength(100, MinimumLength = 2)]
         [Index("IX_Title")]
-        public string Title { get; set; }
+        public string Title {
+            get { return _title; }
+            set
+            {
+                var title = value.Trim();
+                while (title.Contains("  "))
+                {
+                    title = title.Replace("  ", " ");
+                }
+                Name = title.ToLower().Replace(" ", "_");
+                _title = title;
+                
+            }
+        }
 
         [Required, StringLength(100, MinimumLength = 2)]
         [Index("IX_Name")]
-        public string Name { get; set; }
+        public string Name { get; private set; }
          
         public ArticleType Type { get; set; }
 
         public DateTime? EditDate { get; set; }
 
         public DateTime? ReleaseDate { get; set; }
-
-        public GamePlatform? Platform { get; set; }
 
         public short? SiteScore { get; set; }
 
@@ -34,6 +46,8 @@ namespace Gamepad.Service.Data.Entities
         public virtual File Poster { get; set; }
 
         public virtual ArticleInfo MoreInfo { get; set; }
+
+        public virtual ICollection<ArticlePlatform> Platforms { get; set; }
 
         public virtual ICollection<Genre> Genres { get; set; }
 
@@ -60,12 +74,5 @@ namespace Gamepad.Service.Data.Entities
         Movie = 1,
         Serial = 2,
         Hardware = 3
-    }
-
-    public enum GamePlatform
-    {
-        Windows = 0,
-        XboxOn = 1,
-        Ps4 = 2
     }
 }

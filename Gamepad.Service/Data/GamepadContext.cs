@@ -18,6 +18,7 @@ namespace Gamepad.Service.Data
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticleInfo> ArticleInfos { get; set; }
+        public DbSet<ArticlePlatform> ArticlePlatforms { get; set; }
         public DbSet<Cast> Casts { get; set; }
         public DbSet<Community> Communities { get; set; }
         public DbSet<ExternalRank> ExternalRanks { get; set; }

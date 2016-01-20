@@ -32,7 +32,23 @@ namespace Gamepad.Test.ServicesTests
             });
             Assert.IsTrue(result.Succeeded, result.LastError);
 
-            result = GpServices.Cast.SaveChanges();
+            result = GpServices.Cast.Insert(new Cast
+            {
+                Value = "Battlefield",
+                FaValue = "میدان نبرد",
+                CastType = CastType.Brand
+            });
+            Assert.IsTrue(result.Succeeded, result.LastError);
+
+            result = GpServices.Cast.Insert(new Cast
+            {
+                Value = "Konami",
+                FaValue = "کونامی",
+                CastType = CastType.Publisher
+            });
+            Assert.IsTrue(result.Succeeded, result.LastError);
+
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 

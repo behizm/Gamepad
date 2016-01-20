@@ -5,9 +5,11 @@ using Gamepad.Service.Interfaces;
 using Gamepad.Service.Models.ResultModels;
 using Gamepad.Service.Resources;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Gamepad.Service.Models.CrossModels;
+using Gamepad.Service.Models.EventArgs;
 using Gamepad.Service.Utilities.Models;
 
 namespace Gamepad.Service.Services
@@ -23,9 +25,9 @@ namespace Gamepad.Service.Services
             return new ArticleService(new GamepadContext());
         }
 
+
         public Article FindByTitle(string title)
         {
-            title = title.ToLower();
             return Get(x => x.Title == title);
         }
 
@@ -37,7 +39,7 @@ namespace Gamepad.Service.Services
 
         public override OperationResult Insert(Article item)
         {
-            item = _normalizeArticleName(item);
+            //item = _normalizeArticleName(item);
             if (FindByName(item.Name) != null)
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_Duplicate);
@@ -49,13 +51,12 @@ namespace Gamepad.Service.Services
 
         public override OperationResult Update(Article item)
         {
-            item = _normalizeArticleName(item);
             var article = FindByName(item.Name);
             if (article.Id != item.Id)
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_Duplicate);
             }
-            
+
             item.EditDate = DateTime.Now;
             return base.Update(item);
         }
@@ -73,7 +74,7 @@ namespace Gamepad.Service.Services
                     (string.IsNullOrEmpty(model.Name) || u.Name.ToLower().Contains(model.Name.ToLower())) &&
                     (string.IsNullOrEmpty(model.Title) || u.Title.ToLower().Contains(model.Title.ToLower())) &&
                     (!model.Type.HasValue || u.Type == model.Type) &&
-                    (!model.Platform.HasValue || u.Platform == model.Platform) &&
+                    (!model.Platform.HasValue || u.Platforms.Any(x => x.GamePlatform == model.Platform)) &&
                     (!model.ReleaseDateFrom.HasValue || u.ReleaseDate >= model.ReleaseDateFrom) &&
                     (!model.ReleaseDateTo.HasValue || u.ReleaseDate <= model.ReleaseDateTo) &&
                     (!model.SiteScoreFrom.HasValue || u.SiteScore >= model.SiteScoreFrom) &&
@@ -86,7 +87,54 @@ namespace Gamepad.Service.Services
             return Search(expression, ordering);
         }
 
-        public string ChangePoster(Guid articleId, Guid posterId)
+        // Platform ...
+
+        public OperationResult AddPlatform(Guid articleId, ICollection<GamePlatform> platforms)
+        {
+            var article = FindById(articleId);
+            if (article == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            if (article.Platforms == null)
+            {
+                article.Platforms = new List<ArticlePlatform>();
+            }
+            var newPlatforms = platforms.Where(x => article.Platforms.All(p => p.GamePlatform != x));
+            foreach (var gamePlatform in newPlatforms)
+            {
+                article.Platforms.Add(new ArticlePlatform(gamePlatform));
+            }
+            article.EditDate = DateTime.Now;
+            return OperationResult.Success;
+        }
+
+        public OperationResult RemovePlatform(Guid articleId, ICollection<GamePlatform> platforms)
+        {
+            var article = FindById(articleId);
+            if (article == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            if (article.Platforms == null)
+            {
+                return OperationResult.Success;
+            }
+            foreach (var gamePlatform in platforms)
+            {
+                var platform = article.Platforms.FirstOrDefault(x => x.GamePlatform == gamePlatform);
+                if (platform != null)
+                {
+                    Context.Entry(platform).State = EntityState.Deleted;
+                }
+            }
+            article.EditDate = DateTime.Now;
+            return OperationResult.Success;
+        }
+        
+        // Poster ...
+
+        public string ChangePoster(Guid articleId, Guid? posterId)
         {
             var article = FindById(articleId);
             if (article == null)
@@ -94,7 +142,14 @@ namespace Gamepad.Service.Services
                 return null;
             }
 
-            var file = GpServices.File.FindById(posterId);
+            if (!posterId.HasValue)
+            {
+                article.PosterId = null;
+                article.EditDate = DateTime.Now;
+                return base.Update(article).Succeeded ? string.Empty : null;
+            }
+
+            var file = GpServices.File.FindById(posterId.Value);
             if (file == null || file.FileType != FileType.Image || file.Category != FileCategory.ArticlePoster)
             {
                 return null;
@@ -108,6 +163,8 @@ namespace Gamepad.Service.Services
             article.EditDate = DateTime.Now;
             return base.Update(article).Succeeded ? file.Address : null;
         }
+
+        // Genre ...
 
         public OperationResult AddToGenre(Guid articleId, Guid genreId)
         {
@@ -133,7 +190,7 @@ namespace Gamepad.Service.Services
             {
                 article.Genres.Add(genre);
             }
-            return Update(article);
+            return OperationResult.Success;
         }
 
         public OperationResult RemoveFromGenre(Guid articleId, Guid genreId)
@@ -153,10 +210,12 @@ namespace Gamepad.Service.Services
                 return OperationResult.Success;
             }
             article.Genres.Remove(genre);
-            return Update(article);
+            return OperationResult.Success;
         }
 
-        public OperationResult AddCast(Guid articleId, Guid castId)
+        // Cast ...
+
+        public OperationResult AddToCast(Guid articleId, Guid castId)
         {
             var article = FindById(articleId);
             if (article == null)
@@ -180,10 +239,10 @@ namespace Gamepad.Service.Services
             {
                 article.Crews.Add(cast);
             }
-            return Update(article);
+            return OperationResult.Success;
         }
 
-        public OperationResult RemoveCast(Guid articleId, Guid castId)
+        public OperationResult RemoveFromCast(Guid articleId, Guid castId)
         {
             var article = FindById(articleId);
             if (article == null)
@@ -200,26 +259,91 @@ namespace Gamepad.Service.Services
                 return OperationResult.Success;
             }
             article.Crews.Remove(cast);
+            return OperationResult.Success;
+        }
+
+        // Image Gallery ...
+
+        public OperationResult AddToImageGallery(Guid articleId, ICollection<FileBaseInfoModel> images)
+        {
+            var article = FindById(articleId);
+            if (article == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            if (article.ImageGallery == null)
+            {
+                article.ImageGallery = new List<File>();
+            }
+            foreach (var image in images)
+            {
+                image.Address = image.Address.Trim().ToLower();
+                image.Filename = image.Filename.Trim();
+                if (string.IsNullOrEmpty(image.Address) || string.IsNullOrEmpty(image.Filename))
+                {
+                    return OperationResult.Failed(ErrorMessages.Services_General_InputData);
+                }
+                article.ImageGallery.Add(new File
+                {
+                    Title = article.Title.Replace(" ", "") + "Image",
+                    Address = image.Address,
+                    Category = FileCategory.ArticleImage,
+                    FileType = FileType.Image,
+                    Filename = image.Filename,
+                    IsPublic = false,
+                    Size = image.Size
+                });
+            }
+            return OperationResult.Success;
+        }
+
+        public OperationResult RemoveFromImageGallery(Guid articleId, ICollection<Guid> imageIds)
+        {
+            var article = FindById(articleId);
+            if (article == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            foreach (var imageId in imageIds)
+            {
+                var file = article.ImageGallery.FirstOrDefault(x => x.Id == imageId);
+                if (file != null)
+                {
+                    Context.Entry(file).State = EntityState.Deleted;
+                }
+            }
+            return OperationResult.Success;
+        }
+
+        // User Review
+
+        public OperationResult UpdateUserScoresAverage(Guid articleId)
+        {
+            var article = FindById(articleId);
+            if (article == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+
+            if (article.UserReviews == null || !article.UserReviews.Any())
+            {
+                article.UserScoresAverage = null;
+                return Update(article);
+            }
+
+            article.UserScoresAverage = (short)(article.UserReviews.Sum(x => x.Score) / article.UserReviews.Count());
             return Update(article);
         }
 
 
-        #region Private Methods
+        #region Events Listeners
 
-        private readonly Func<Article, Article> _normalizeArticleName = item =>
+        public void OnUserReviewAdded(object sender, UserReviewEventArgs userReview)
         {
-            var title = item.Title.Trim();
-            while (title.Contains("  "))
-            {
-                title = title.Replace("  ", " ");
-            }
-            var name = title.ToLower().Replace(" ", "_");
-            item.Title = title;
-            item.Name = name;
-            return item;
-        };
+            //throw new Exception("sdsd");
+            UpdateUserScoresAverage(userReview.ArticleId);
+        }
 
         #endregion
-
     }
 }

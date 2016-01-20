@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\EventsAttribute.cs" />
+    <Compile Include="Data\Entities\ArticlePlatform.cs" />
     <Compile Include="Data\Entities\SystemHardware.cs" />
     <Compile Include="Interfaces\IArticleService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
@@ -89,7 +90,9 @@
     <Compile Include="Interfaces\ISystemHardwareService.cs" />
     <Compile Include="Interfaces\IPermissionService.cs" />
     <Compile Include="Interfaces\IGenreService.cs" />
+    <Compile Include="Interfaces\IUserReviewService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Models\CrossModels\FileModels.cs" />
     <Compile Include="Models\EventArgs\UserEventArgs.cs" />
     <Compile Include="Models\CrossModels\CastModels.cs" />
     <Compile Include="Models\CrossModels\GenreModels.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="Models\CrossModels\ProfileModels.cs" />
     <Compile Include="Models\CrossModels\RoleModels.cs" />
     <Compile Include="Models\CrossModels\SystemHardwareModels.cs" />
+    <Compile Include="Models\EventArgs\UserReviewEventArgs.cs" />
     <Compile Include="Services\ArticleService.cs" />
     <Compile Include="Services\EventManager.cs" />
     <Compile Include="Services\FileService.cs" />
@@ -151,6 +155,7 @@
     <Compile Include="Models\CrossModels\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\UserReviewService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utilities\Async\AsyncTools.cs" />
     <Compile Include="Utilities\Cryptography\Hashing.cs" />
