@@ -1,4 +1,6 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Gamepad.Service.Data;
 using Gamepad.Service.Data.Entities;
@@ -23,14 +25,130 @@ namespace Gamepad.Service.Services
 
         public override OperationResult Insert(UserReview item)
         {
+            var article = GpServices.Article.FindById(item.ArticleId);
+            if (article == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            if (article.UserReviews != null && article.UserReviews.Any(x => x.UserId == item.UserId))
+            {
+                return OperationResult.Failed("شما قبلا نظر داده اید.");
+            }
             item.DislikeCount = 0;
             item.LikeCount = 0;
-            var result = base.Insert(item);
-            if (result.Succeeded)
+            item.Article = null;
+            if (article.UserReviews == null)
             {
-                OnUserReviewAdded(new UserReviewEventArgs { ArticleId = item.Id });
+                article.UserReviews = new List<UserReview>();
             }
-            return result;
+            article.UserReviews.Add(item);
+            article.UserScoresAverage = (short)(article.UserReviews.Sum(x => x.Score) / article.UserReviews.Count());
+            return OperationResult.Success;
+        }
+
+        public override OperationResult Update(UserReview item)
+        {
+            item.Article.UserScoresAverage = (short)(item.Article.UserReviews.Sum(x => x.Score) / item.Article.UserReviews.Count());
+            return base.Update(item);
+        }
+
+        public override OperationResult Delete(Guid id)
+        {
+            return base.Delete(id);
+        }
+
+        public OperationResult Like(Guid userReviewId, Guid userId)
+        {
+            var review = FindById(userReviewId);
+            if (review == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            var user = GpServices.User.FindById(userId);
+            if (user == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            var userReviewLike = review.Likes.FirstOrDefault(x => x.UserId == userId);
+            if (userReviewLike != null && userReviewLike.Like)
+            {
+                return OperationResult.Success;
+            }
+            if (userReviewLike != null && !userReviewLike.Like)
+            {
+                userReviewLike.Like = true;
+                review.LikeCount = review.Likes.Count(x => x.Like);
+                review.DislikeCount = review.Likes.Count(x => !x.Like);
+                return OperationResult.Success;
+            }
+            if (review.Likes == null)
+            {
+                review.Likes = new List<UserReviewLike>();
+            }
+            review.Likes.Add(new UserReviewLike
+            {
+                UserId = userId,
+                Like = true,
+            });
+            review.LikeCount = review.Likes.Count(x => x.Like);
+            review.DislikeCount = review.Likes.Count(x => !x.Like);
+            return OperationResult.Success;
+        }
+
+        public OperationResult Dislike(Guid userReviewId, Guid userId)
+        {
+            var review = FindById(userReviewId);
+            if (review == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            var user = GpServices.User.FindById(userId);
+            if (user == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            var userReviewLike = review.Likes.FirstOrDefault(x => x.UserId == userId);
+            if (userReviewLike != null && !userReviewLike.Like)
+            {
+                return OperationResult.Success;
+            }
+            if (userReviewLike != null && userReviewLike.Like)
+            {
+                userReviewLike.Like = false;
+                review.LikeCount = review.Likes.Count(x => x.Like);
+                review.DislikeCount = review.Likes.Count(x => !x.Like);
+                return OperationResult.Success;
+            }
+            if (review.Likes == null)
+            {
+                review.Likes = new List<UserReviewLike>();
+            }
+            review.Likes.Add(new UserReviewLike
+            {
+                UserId = userId,
+                Like = false,
+            });
+            review.LikeCount = review.Likes.Count(x => x.Like);
+            review.DislikeCount = review.Likes.Count(x => !x.Like);
+            return OperationResult.Success;
+        }
+
+        public OperationResult CancelLike(Guid userReviewId, Guid userId)
+        {
+            var review = FindById(userReviewId);
+            if (review == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            var like = review.Likes.FirstOrDefault(x => x.UserId == userId);
+            if (like == null)
+            {
+                return OperationResult.Success;
+            }
+            Context.Entry(like).State = EntityState.Deleted;
+            review.LikeCount = review.Likes.Count(x => x.Like);
+            review.DislikeCount = review.Likes.Count(x => !x.Like);
+            return OperationResult.Success;
         }
 
 

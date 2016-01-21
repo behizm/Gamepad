@@ -27,11 +27,61 @@ namespace Gamepad.Test.ServicesTests
             {
                 ArticleId = Guid.Parse("2e47e8c6-bf3c-46c8-b348-11dabd1f854e"),
                 Description = "bazi kheili kheili khobie.",
-                Score = 90,
+                Score = 85,
                 UserId = Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3")
             };
 
             var result = GpServices.UserReview.Insert(userReview);
+            Assert.IsTrue(result.Succeeded, result.LastError);
+
+            result = GpServices.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
+        }
+
+        [TestMethod]
+        public void Update()
+        {
+            var review = GpServices.UserReview.FindById(Guid.Parse("f79993e0-af7a-435e-abae-35c102456309"));
+            Assert.IsNotNull(review);
+
+            review.Score = (short)(review.Score - 10);
+            var result = GpServices.UserReview.Update(review);
+            Assert.IsTrue(result.Succeeded, result.LastError);
+
+            result = GpServices.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
+        }
+
+        [TestMethod]
+        public void Like()
+        {
+            var result = GpServices.UserReview.Like(
+                Guid.Parse("f79993e0-af7a-435e-abae-35c102456309"), 
+                Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3"));
+            Assert.IsTrue(result.Succeeded, result.LastError);
+
+            result = GpServices.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
+        }
+
+        [TestMethod]
+        public void Dislike()
+        {
+            var result = GpServices.UserReview.Dislike(
+                Guid.Parse("f79993e0-af7a-435e-abae-35c102456309"), 
+                Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3"));
+            Assert.IsTrue(result.Succeeded, result.LastError);
+
+            result = GpServices.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
+        }
+
+        [TestMethod]
+        public void CancelLike()
+        {
+            var result = GpServices.UserReview.CancelLike(
+                Guid.Parse("f79993e0-af7a-435e-abae-35c102456309"), 
+                Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3"));
             Assert.IsTrue(result.Succeeded, result.LastError);
 
             result = GpServices.SaveChanges();

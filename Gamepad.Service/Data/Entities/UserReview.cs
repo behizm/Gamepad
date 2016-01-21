@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,5 +26,8 @@ namespace Gamepad.Service.Data.Entities
         [ForeignKey("Article")]
         public Guid ArticleId { get; set; }
         public virtual Article Article { get; set; }
+
+        public virtual ICollection<UserReviewLike> Likes { get; set; }
+
     }
 }
