@@ -52,9 +52,38 @@ namespace Gamepad.Service.Services
             return base.Update(item);
         }
 
-        public override OperationResult Delete(Guid id)
+        public override OperationResult Delete(UserReview item)
         {
-            return base.Delete(id);
+            var article = GpServices.Article.FindById(item.ArticleId);
+            if (article == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            var userReview = article.UserReviews.FirstOrDefault(x => x.Id == item.Id);
+            if (userReview == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            base.Delete(userReview);
+            if (!article.UserReviews.Any())
+            {
+                article.UserScoresAverage = null;
+            }
+            else
+            {
+                article.UserScoresAverage = (short)(article.UserReviews.Sum(x => x.Score) / article.UserReviews.Count());
+            }
+            return OperationResult.Success;
+        }
+
+        public override OperationResult Delete(Guid userReviewId)
+        {
+            var userReview = FindById(userReviewId);
+            if (userReview == null)
+            {
+                return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
+            }
+            return Delete(userReview);
         }
 
         public OperationResult Like(Guid userReviewId, Guid userId)

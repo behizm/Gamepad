@@ -27,8 +27,8 @@ namespace Gamepad.Test.ServicesTests
             {
                 ArticleId = Guid.Parse("2e47e8c6-bf3c-46c8-b348-11dabd1f854e"),
                 Description = "bazi kheili kheili khobie.",
-                Score = 85,
-                UserId = Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3")
+                Score = 90,
+                UserId = Guid.Parse("ab359485-869b-494c-a8c7-c53eb0a9b986")
             };
 
             var result = GpServices.UserReview.Insert(userReview);
@@ -82,6 +82,16 @@ namespace Gamepad.Test.ServicesTests
             var result = GpServices.UserReview.CancelLike(
                 Guid.Parse("f79993e0-af7a-435e-abae-35c102456309"), 
                 Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3"));
+            Assert.IsTrue(result.Succeeded, result.LastError);
+
+            result = GpServices.SaveChanges();
+            Assert.IsTrue(result.Succeeded, result.LastError);
+        }
+
+        [TestMethod]
+        public void Delete()
+        {
+            var result = GpServices.UserReview.Delete(Guid.Parse("1a961cf1-d4cd-4e63-9b0f-e1163cb74378"));
             Assert.IsTrue(result.Succeeded, result.LastError);
 
             result = GpServices.SaveChanges();

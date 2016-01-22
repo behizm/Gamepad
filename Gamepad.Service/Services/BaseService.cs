@@ -16,7 +16,6 @@ namespace Gamepad.Service.Services
     internal class BaseService<TEntity> where TEntity : BaseEntity
     {
         protected GamepadContext Context;
-        //private OperationResult _operationResult;
 
         public BaseService(GamepadContext context)
         {
@@ -179,5 +178,9 @@ namespace Gamepad.Service.Services
             return rvalue;
         }
 
+        protected string SwearWordFilter(string text)
+        {
+            return text;
+        }
     }
 }
