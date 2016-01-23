@@ -37,6 +37,7 @@ namespace Gamepad.Service.Services
             item.DislikeCount = 0;
             item.LikeCount = 0;
             item.Article = null;
+            item.Description = SwearWordFilter(item.Description);
             if (article.UserReviews == null)
             {
                 article.UserReviews = new List<UserReview>();
@@ -48,6 +49,7 @@ namespace Gamepad.Service.Services
 
         public override OperationResult Update(UserReview item)
         {
+            item.Description = SwearWordFilter(item.Description);
             item.Article.UserScoresAverage = (short)(item.Article.UserReviews.Sum(x => x.Score) / item.Article.UserReviews.Count());
             return base.Update(item);
         }

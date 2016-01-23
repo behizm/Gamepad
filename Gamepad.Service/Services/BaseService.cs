@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Gamepad.Service.Data;
 using Gamepad.Service.Data.Entities;
+using Gamepad.Service.Liberary;
 using Gamepad.Service.Models.ResultModels;
 using Gamepad.Service.Resources;
 using Gamepad.Service.Utilities.Models;
@@ -180,6 +181,24 @@ namespace Gamepad.Service.Services
 
         protected string SwearWordFilter(string text)
         {
+            while (text.Contains("  "))
+            {
+                text = text.Replace("  ", " ");
+            }
+            foreach (var swear in AppConfigs.SwearWordList)
+            {
+                if (text.Contains(swear))
+                {
+                    text = text.Replace(swear, "***");
+                }
+            }
+            foreach (var swear in AppConfigs.SwearWordFaList)
+            {
+                if (text.Contains(swear))
+                {
+                    text = text.Replace(swear, "***");
+                }
+            }
             return text;
         }
     }

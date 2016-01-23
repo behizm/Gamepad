@@ -25,9 +25,9 @@ namespace Gamepad.Test.ServicesTests
         {
             var userReview = new UserReview
             {
-                ArticleId = Guid.Parse("2e47e8c6-bf3c-46c8-b348-11dabd1f854e"),
-                Description = "bazi kheili kheili khobie.",
-                Score = 90,
+                ArticleId = Guid.Parse("42cfd283-0bae-4bee-9f65-21f2aa9af207"),
+                Description = "that's fucking good game, best online fps.",
+                Score = 80,
                 UserId = Guid.Parse("ab359485-869b-494c-a8c7-c53eb0a9b986")
             };
 

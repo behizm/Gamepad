@@ -82,8 +82,10 @@
   <ItemGroup>
     <Compile Include="Attributes\EventsAttribute.cs" />
     <Compile Include="Data\Entities\ArticlePlatform.cs" />
+    <Compile Include="Data\Entities\Config.cs" />
     <Compile Include="Data\Entities\SystemHardware.cs" />
     <Compile Include="Interfaces\IArticleService.cs" />
+    <Compile Include="Interfaces\IConfigService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IBaseService.cs" />
     <Compile Include="Interfaces\ICastService.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Interfaces\IGenreService.cs" />
     <Compile Include="Interfaces\IUserReviewService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Liberary\AppConfigs.cs" />
     <Compile Include="Models\CrossModels\FileModels.cs" />
     <Compile Include="Models\EventArgs\UserEventArgs.cs" />
     <Compile Include="Models\CrossModels\CastModels.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="Models\CrossModels\SystemHardwareModels.cs" />
     <Compile Include="Models\EventArgs\UserReviewEventArgs.cs" />
     <Compile Include="Services\ArticleService.cs" />
+    <Compile Include="Services\ConfigService.cs" />
     <Compile Include="Services\EventManager.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\CastService.cs" />

@@ -45,5 +45,6 @@ namespace Gamepad
         public static ISystemHardwareService SystemHardware { get; } = new SystemHardwareService(Context);
         public static IArticleService Article { get; } = new ArticleService(Context);
         public static IUserReviewService UserReview { get; } = new UserReviewService(Context);
+        public static IConfigService Config { get; } = new ConfigService(Context);
     }
 }
