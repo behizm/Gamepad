@@ -7,13 +7,28 @@ namespace Gamepad.Service.Data.Entities
 {
     public class Post : BaseEntity
     {
+        private string _title;
         [Required, StringLength(200, MinimumLength = 4)]
         [Index("IX_Title")]
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                var title = value.Trim();
+                while (title.Contains("  "))
+                {
+                    title = title.Replace("  ", " ");
+                }
+                Name = title.ToLower().Replace(" ", "_");
+                _title = title;
+
+            }
+        }
 
         [Required, StringLength(200, MinimumLength = 4)]
         [Index("IX_Name")]
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         public PostType PostType { get; set; }
 
@@ -25,6 +40,8 @@ namespace Gamepad.Service.Data.Entities
         public DateTime? PublishDate { get; set; }
 
         public long View { get; set; }
+
+        public bool IsHidden { get; set; }
 
 
 
@@ -46,6 +63,8 @@ namespace Gamepad.Service.Data.Entities
 
         public virtual ICollection<File> Images { get; set; }
 
+        [ForeignKey("Video")]
+        public Guid? VideoId { get; set; }
         public virtual File Video { get; set; }
 
         public virtual ICollection<File> Attachments { get; set; }

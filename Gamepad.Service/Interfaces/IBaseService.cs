@@ -17,7 +17,9 @@ namespace Gamepad.Service.Interfaces
         OperationResult UpdateBatch(ICollection<TEntity> items);
         OperationResult Delete(TEntity item);
         OperationResult Delete(Guid id);
+        OperationResult Delete(Expression<Func<TEntity, bool>> predicate);
         OperationResult DeleteRange(ICollection<TEntity> items);
+        OperationResult DeleteRange(Expression<Func<TEntity, bool>> predicate);
         TEntity Get(Expression<Func<TEntity, bool>> predicate);
         TEntity FindById(Guid id);
         IQueryable<TEntity> Search(Expression<Func<TEntity, bool>> predicate);

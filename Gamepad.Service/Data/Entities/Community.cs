@@ -20,7 +20,7 @@ namespace Gamepad.Service.Data.Entities
         public virtual User User { get; set; }
 
         [ForeignKey("Reply")]
-        public Guid ReplyId { get; set; }
+        public Guid? ReplyId { get; set; }
         public virtual Community Reply { get; set; }
     }
 }

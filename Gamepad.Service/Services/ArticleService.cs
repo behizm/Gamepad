@@ -315,7 +315,7 @@ namespace Gamepad.Service.Services
             return OperationResult.Success;
         }
 
-        // User Review
+        // User Review ...
 
         public OperationResult UpdateUserScoresAverage(Guid articleId)
         {

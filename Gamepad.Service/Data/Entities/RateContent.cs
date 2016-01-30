@@ -2,6 +2,16 @@
 {
     public class RateContent : BaseEntity
     {
+        public RateContent()
+        {
+        }
+
+        public RateContent(RateSource rateSource, RateContentValue rateContentValue)
+        {
+            RateSource = rateSource;
+            Content = rateContentValue;
+        }
+
         public RateSource RateSource { get; set; }
         public RateContentValue Content { get; set; }
     }

@@ -27,7 +27,7 @@ namespace Gamepad.Test.ServicesTests
             var result = GpServices.SystemHardware.Insert(new SystemHardware
             {
                 HardwareType = SystemHardwareType.Vga,
-                Name = "GeForce Gtx 980"
+                Name = "GeForce Gtx 650 Ti"
             });
             Assert.IsTrue(result.Succeeded, result.LastError);
             result = GpServices.SystemHardware.SaveChanges();

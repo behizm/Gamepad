@@ -69,10 +69,26 @@ namespace Gamepad.Service.Services
             return OperationResult.Success;
         }
 
+        public virtual OperationResult Delete(Expression<Func<TEntity, bool>> predicate)
+        {
+            var item = Get(predicate);
+            return item == null
+                ? OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound)
+                : Delete(item);
+        }
+
         public virtual OperationResult DeleteRange(ICollection<TEntity> items)
         {
             Context.Set<TEntity>().RemoveRange(items);
             return OperationResult.Success;
+        }
+
+        public virtual OperationResult DeleteRange(Expression<Func<TEntity, bool>> predicate)
+        {
+            var items = Search(predicate);
+            return items == null
+                ? OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound)
+                : DeleteRange(items.ToList());
         }
 
         public virtual TEntity Get(Expression<Func<TEntity, bool>> predicate)

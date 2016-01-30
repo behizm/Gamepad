@@ -64,12 +64,16 @@
     <Compile Include="ServicesTests\ArticleServiceTest.cs" />
     <Compile Include="ServicesTests\BaseServiceTest.cs" />
     <Compile Include="ServicesTests\ConfigServiceTest.cs" />
+    <Compile Include="ServicesTests\ExternalRankServiceTest.cs" />
+    <Compile Include="ServicesTests\PostServicesTest.cs" />
+    <Compile Include="ServicesTests\RateServicesTest.cs" />
     <Compile Include="ServicesTests\SystemHardwareServiceTest.cs" />
     <Compile Include="ServicesTests\FileServiceTest.cs" />
     <Compile Include="ServicesTests\CastServiceTest.cs" />
     <Compile Include="ServicesTests\PermissionServiceTest.cs" />
     <Compile Include="ServicesTests\RoleServiceTest.cs" />
     <Compile Include="ServicesTests\GenreServiceTest.cs" />
+    <Compile Include="ServicesTests\SystemRequirmentServiceTest.cs" />
     <Compile Include="ServicesTests\UserReviewServiceTest.cs" />
     <Compile Include="ServicesTests\UserServiceTest.cs" />
   </ItemGroup>
