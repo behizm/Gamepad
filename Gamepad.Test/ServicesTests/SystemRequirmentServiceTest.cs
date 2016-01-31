@@ -22,7 +22,7 @@ namespace Gamepad.Test.ServicesTests
         [TestMethod]
         public void Insert()
         {
-            var result = GpServices.SystemRequirmentService.Insert(new SystemRequirment
+            var result = GpServices.SystemRequirment.Insert(new SystemRequirment
             {
                 ArticleId = Guid.Parse("2e47e8c6-bf3c-46c8-b348-11dabd1f854e"),
                 SystemHardwareId = Guid.Parse("43a30355-baa8-431a-80aa-4159d32da2c5"),
@@ -37,7 +37,7 @@ namespace Gamepad.Test.ServicesTests
         [TestMethod]
         public void Delete()
         {
-            var result = GpServices.SystemRequirmentService.Delete(Guid.Parse("a6066fb5-da46-4a3b-8d4a-9c3fa24f5997"));
+            var result = GpServices.SystemRequirment.Delete(Guid.Parse("a6066fb5-da46-4a3b-8d4a-9c3fa24f5997"));
             Assert.IsTrue(result.Succeeded, result.LastError);
 
             result = GpServices.SaveChanges();

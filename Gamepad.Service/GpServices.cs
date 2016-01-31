@@ -47,7 +47,8 @@ namespace Gamepad
         public static IUserReviewService UserReview { get; } = new UserReviewService(Context);
         public static IConfigService Config { get; } = new ConfigService(Context);
         public static IExternalRankService ExternalRank { get; } = new ExternalRankService(Context);
-        public static IRateService RateService { get; } = new RateService(Context);
-        public static ISystemRequirmentService SystemRequirmentService { get; } = new SystemRequirmentService(Context);
+        public static IRateService Rate { get; } = new RateService(Context);
+        public static ISystemRequirmentService SystemRequirment { get; } = new SystemRequirmentService(Context);
+        public static IPostService Post { get; } = new PostService(Context);
     }
 }

@@ -264,35 +264,20 @@ namespace Gamepad.Service.Services
 
         // Image Gallery ...
 
-        public OperationResult AddToImageGallery(Guid articleId, ICollection<FileBaseInfoModel> images)
+        public OperationResult AddToImageGallery(Guid articleId, ICollection<Guid> imageIds)
         {
             var article = FindById(articleId);
             if (article == null)
             {
                 return OperationResult.Failed(ErrorMessages.Services_General_ItemNotFound);
             }
-            if (article.ImageGallery == null)
+            foreach (var imageId in imageIds)
             {
-                article.ImageGallery = new List<File>();
-            }
-            foreach (var image in images)
-            {
-                image.Address = image.Address.Trim().ToLower();
-                image.Filename = image.Filename.Trim();
-                if (string.IsNullOrEmpty(image.Address) || string.IsNullOrEmpty(image.Filename))
+                var file = article.ImageGallery.FirstOrDefault(x => x.Id == imageId);
+                if (file != null)
                 {
-                    return OperationResult.Failed(ErrorMessages.Services_General_InputData);
+                    article.ImageGallery.Add(file);
                 }
-                article.ImageGallery.Add(new File
-                {
-                    Title = article.Title.Replace(" ", "") + "Image",
-                    Address = image.Address,
-                    Category = FileCategory.ArticleImage,
-                    FileType = FileType.Image,
-                    Filename = image.Filename,
-                    IsPublic = false,
-                    Size = image.Size
-                });
             }
             return OperationResult.Success;
         }
@@ -309,7 +294,7 @@ namespace Gamepad.Service.Services
                 var file = article.ImageGallery.FirstOrDefault(x => x.Id == imageId);
                 if (file != null)
                 {
-                    Context.Entry(file).State = EntityState.Deleted;
+                    article.ImageGallery.Remove(file);
                 }
             }
             return OperationResult.Success;

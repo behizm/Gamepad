@@ -217,5 +217,15 @@ namespace Gamepad.Service.Services
             }
             return text;
         }
+
+        protected ICollection<T> ExceptById<T>(ICollection<T> collection, ICollection<T> with) where T : BaseEntity
+        {
+            return collection.Where(x => with.All(b => x.Id != b.Id)).ToList();
+        }
+
+        protected ICollection<T> AllyById<T>(ICollection<T> collection, ICollection<T> with) where T : BaseEntity
+        {
+            return collection.Where(x => with.Any(b => x.Id == b.Id)).ToList();
+        }
     }
 }

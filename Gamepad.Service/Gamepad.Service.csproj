@@ -100,7 +100,12 @@
     <Compile Include="Interfaces\IUserReviewService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Liberary\AppConfigs.cs" />
+    <Compile Include="Migrations\201601311057533_changePostEnt.cs" />
+    <Compile Include="Migrations\201601311057533_changePostEnt.Designer.cs">
+      <DependentUpon>201601311057533_changePostEnt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\CrossModels\FileModels.cs" />
+    <Compile Include="Models\CrossModels\PostModels.cs" />
     <Compile Include="Models\EventArgs\UserEventArgs.cs" />
     <Compile Include="Models\CrossModels\CastModels.cs" />
     <Compile Include="Models\CrossModels\GenreModels.cs" />
@@ -145,7 +150,7 @@
     <Compile Include="Data\Entities\PostComment.cs" />
     <Compile Include="Data\Entities\PostContent.cs" />
     <Compile Include="Data\Entities\PostReview.cs" />
-    <Compile Include="Data\Entities\PostTag.cs" />
+    <Compile Include="Data\Entities\Tag.cs" />
     <Compile Include="Data\Entities\Profile.cs" />
     <Compile Include="Data\Entities\Rate.cs" />
     <Compile Include="Data\Entities\RateContent.cs" />
@@ -196,6 +201,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601311057533_changePostEnt.resx">
+      <DependentUpon>201601311057533_changePostEnt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ErrorMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>

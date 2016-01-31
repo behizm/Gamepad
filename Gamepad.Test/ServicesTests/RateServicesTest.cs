@@ -24,7 +24,7 @@ namespace Gamepad.Test.ServicesTests
         public void Insert()
         {
             var articleId = Guid.Parse("42cfd283-0bae-4bee-9f65-21f2aa9af207");
-            var result = GpServices.RateService.Insert(new Rate
+            var result = GpServices.Rate.Insert(new Rate
             {
                 ArticleId = articleId,
                 RateSource = RateSource.Esrb,
@@ -46,7 +46,7 @@ namespace Gamepad.Test.ServicesTests
         public void Update()
         {
             var rateId = Guid.Parse("69436e1f-e67e-4338-b4b8-376e6eabd76b");
-            var rate = GpServices.RateService.FindById(rateId);
+            var rate = GpServices.Rate.FindById(rateId);
             Assert.IsNotNull(rate);
 
             rate.RateSource = RateSource.Pegi;
@@ -56,7 +56,7 @@ namespace Gamepad.Test.ServicesTests
                 new RateContent(RateSource.Pegi, RateContentValue.EsrbAlcoholReference),
                 new RateContent(RateSource.Pegi, RateContentValue.EsrbAnimatedBlood),
             };
-            var result = GpServices.RateService.Update(rate, rateContents);
+            var result = GpServices.Rate.Update(rate, rateContents);
             Assert.IsTrue(result.Succeeded, result.LastError);
 
             result = GpServices.SaveChanges();
@@ -67,7 +67,7 @@ namespace Gamepad.Test.ServicesTests
         public void Delete()
         {
             var rateId = Guid.Parse("69436e1f-e67e-4338-b4b8-376e6eabd76b");
-            var result = GpServices.RateService.Delete(rateId);
+            var result = GpServices.Rate.Delete(rateId);
             Assert.IsTrue(result.Succeeded, result.LastError);
 
             result = GpServices.SaveChanges();

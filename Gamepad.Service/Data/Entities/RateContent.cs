@@ -1,4 +1,7 @@
-﻿namespace Gamepad.Service.Data.Entities
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Gamepad.Service.Data.Entities
 {
     public class RateContent : BaseEntity
     {
@@ -13,7 +16,12 @@
         }
 
         public RateSource RateSource { get; set; }
+
         public RateContentValue Content { get; set; }
+
+        [ForeignKey("Rate")]
+        public Guid RateId { get; set; }
+        public virtual Rate Rate { get; set; }
     }
 
     public enum RateContentValue

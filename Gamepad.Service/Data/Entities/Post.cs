@@ -53,23 +53,23 @@ namespace Gamepad.Service.Data.Entities
         public Guid? MainImageId { get; set; }
         public virtual File MainImage { get; set; }
 
-        public virtual PostContent PostContent { get; set; }
-
-        public virtual ICollection<PostTag> PostTags { get; set; }
-
-        public virtual ICollection<Article> Articles { get; set; }
-
-        public virtual ICollection<PostReview> ReviewScores { get; set; }
-
-        public virtual ICollection<File> Images { get; set; }
-
         [ForeignKey("Video")]
         public Guid? VideoId { get; set; }
         public virtual File Video { get; set; }
 
-        public virtual ICollection<File> Attachments { get; set; }
+        public virtual PostContent PostContent { get; set; }
+
+        public virtual ICollection<PostReview> ReviewScores { get; set; }
 
         public virtual ICollection<PostComment> PostComments { get; set; }
+
+        public virtual ICollection<Article> Articles { get; set; }
+
+        public virtual ICollection<Tag> Tags { get; set; }
+
+        public virtual ICollection<File> ImageGallery { get; set; }
+
+        public virtual ICollection<File> Attachments { get; set; }
     }
 
     public enum PostType

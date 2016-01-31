@@ -174,16 +174,21 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.Article.AddToImageGallery(
                 Guid.Parse("2e47e8c6-bf3c-46c8-b348-11dabd1f854e"),
-                new List<FileBaseInfoModel>
+                new List<Guid>
                 {
-                    new FileBaseInfoModel { Filename = "mgsv_001", Address = "metalimage001.jpg", Size = 57},
-                    new FileBaseInfoModel { Filename = "mgsv_002", Address = "metalimage002.jpg", Size = 57},
-                    new FileBaseInfoModel { Filename = "mgsv_003", Address = "metalimage003.jpg", Size = 57},
+                    Guid.Parse("4c848f2d-2894-4df3-a833-69185b38f0cc"),
+                    Guid.Parse("6d77d548-e789-4128-9b31-b17d083543a7"),
                 });
             Assert.IsTrue(result.Succeeded, result.LastError);
 
             result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
+
+            var article = GpServices.Article.FindById(Guid.Parse("2e47e8c6-bf3c-46c8-b348-11dabd1f854e"));
+            foreach (var file in article.ImageGallery)
+            {
+                Console.WriteLine(file.Filename);
+            }
         }
 
         [TestMethod]

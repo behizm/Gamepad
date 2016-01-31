@@ -33,7 +33,7 @@ namespace Gamepad.Service.Data
         public DbSet<PostComment> PostComments { get; set; }
         public DbSet<PostContent> PostContents { get; set; }
         public DbSet<PostReview> PostReviews { get; set; }
-        public DbSet<PostTag> PostTags { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Rate> Rates { get; set; }
         public DbSet<RateContent> RateContents { get; set; }
@@ -52,8 +52,23 @@ namespace Gamepad.Service.Data
             //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
-            //modelBuilder.Entity<Post>().HasMany<File>(s => s.Branches).WithMany(c => c.Users)
-            //    .Map(c => c.MapLeftKey("User_id").MapRightKey("Branch_id").ToTable("UserBranches", "App"));
+            modelBuilder
+                .Entity<Article>()
+                .HasMany<File>(s => s.ImageGallery)
+                .WithMany(c => c.ImageGalleryArticles)
+                .Map(c => c.MapLeftKey("ArticleId").MapRightKey("FileId").ToTable("ArticleImageGallery", "dbo"));
+
+            modelBuilder
+                .Entity<Post>()
+                .HasMany<File>(s => s.ImageGallery)
+                .WithMany(c => c.ImageGalleryPosts)
+                .Map(c => c.MapLeftKey("PostId").MapRightKey("FileId").ToTable("PostImageGallery", "dbo"));
+
+            modelBuilder
+                .Entity<Post>()
+                .HasMany<File>(s => s.Attachments)
+                .WithMany(c => c.AttachmentPosts)
+                .Map(c => c.MapLeftKey("PostId").MapRightKey("FileId").ToTable("PostAttachments", "dbo"));
         }
 
         public void Seed(GamepadContext context)

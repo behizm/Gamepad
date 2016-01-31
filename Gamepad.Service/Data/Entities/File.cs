@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,6 +31,12 @@ namespace Gamepad.Service.Data.Entities
         [ForeignKey("Creator")]
         public Guid? CreatorId { get; set; }
         public virtual User Creator { get; set; }
+
+        public ICollection<Article> ImageGalleryArticles { get; set; }
+
+        public ICollection<Post> ImageGalleryPosts { get; set; }
+
+        public ICollection<Post> AttachmentPosts { get; set; }
     }
 
     public enum FileType

@@ -20,7 +20,7 @@ namespace Gamepad.Service.Interfaces
         OperationResult RemoveFromGenre(Guid articleId, Guid genreId);
         OperationResult AddToCast(Guid articleId, Guid castId);
         OperationResult RemoveFromCast(Guid articleId, Guid castId);
-        OperationResult AddToImageGallery(Guid articleId, ICollection<FileBaseInfoModel> images);
+        OperationResult AddToImageGallery(Guid articleId, ICollection<Guid> imageIds);
         OperationResult RemoveFromImageGallery(Guid articleId, ICollection<Guid> imageIds);
         OperationResult UpdateUserScoresAverage(Guid articleId);
 
