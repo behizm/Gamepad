@@ -13,13 +13,15 @@ namespace Gamepad.Service.Data.Entities
         [Required, StringLength(500, MinimumLength = 2)]
         public string Body { get; set; }
 
-        [Required, StringLength(500, MinimumLength = 2)]
+        [StringLength(500, MinimumLength = 2)]
         public string Description { get; set; }
 
-        public bool IsActive { get; set; }
-
+        [Range(1, 100)]
         public short MaxChoiceCount { get; set; }
 
+        public bool IsVisible { get; set; }
+
+        // expire date for participating in poll
         public DateTime? ExpiredDate { get; set; }
 
 

@@ -91,6 +91,10 @@
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IBaseService.cs" />
     <Compile Include="Interfaces\ICastService.cs" />
+    <Compile Include="Interfaces\IPollChoiceService.cs" />
+    <Compile Include="Interfaces\IPollService.cs" />
+    <Compile Include="Interfaces\IPollUserAnswerService.cs" />
+    <Compile Include="Interfaces\IPostCommentService.cs" />
     <Compile Include="Interfaces\IPostService.cs" />
     <Compile Include="Interfaces\IRateService.cs" />
     <Compile Include="Interfaces\ISystemHardwareService.cs" />
@@ -100,10 +104,6 @@
     <Compile Include="Interfaces\IUserReviewService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Liberary\AppConfigs.cs" />
-    <Compile Include="Migrations\201601311057533_changePostEnt.cs" />
-    <Compile Include="Migrations\201601311057533_changePostEnt.Designer.cs">
-      <DependentUpon>201601311057533_changePostEnt.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\CrossModels\FileModels.cs" />
     <Compile Include="Models\CrossModels\PostModels.cs" />
     <Compile Include="Models\EventArgs\UserEventArgs.cs" />
@@ -123,6 +123,10 @@
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\CastService.cs" />
     <Compile Include="Services\PermissionService.cs" />
+    <Compile Include="Services\PollChoiceService.cs" />
+    <Compile Include="Services\PollService.cs" />
+    <Compile Include="Services\PollUserAnswerServices.cs" />
+    <Compile Include="Services\PostCommentService.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Services\RateService.cs" />
     <Compile Include="Services\RoleService.cs" />
@@ -201,9 +205,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601311057533_changePostEnt.resx">
-      <DependentUpon>201601311057533_changePostEnt.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ErrorMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>

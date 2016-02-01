@@ -9,7 +9,7 @@ namespace Gamepad.Service.Data.Entities
         [Required, StringLength(300)]
         public string Content { get; set; }
 
-        public bool IsForbiddenComment { get; set; }
+        public bool IsConfirmed { get; set; }
 
 
         [ForeignKey("User")]

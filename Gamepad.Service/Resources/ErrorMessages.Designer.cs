@@ -106,6 +106,15 @@ namespace Gamepad.Service.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to امکان انجام این درخواست وجود ندارد..
+        /// </summary>
+        public static string Services_General_NoAccess {
+            get {
+                return ResourceManager.GetString("Services_General_NoAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} مورد نظر قابل حذف نیست..
         /// </summary>
         public static string Services_General_NonDeletable_ {

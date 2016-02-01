@@ -48,4 +48,4 @@ E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\obj\Debug\Ga
 E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.csproj.GenerateResource.Cache
 E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.dll
 E:\Behnam\Programming House\GitHub Projects\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.pdb
-E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changePostEnt.resources
+E:\GitHub\Gamepad\Gamepad\Gamepad.Service\obj\Debug\Gamepad.Service.Migrations.changePoll.resources

@@ -50,5 +50,7 @@ namespace Gamepad
         public static IRateService Rate { get; } = new RateService(Context);
         public static ISystemRequirmentService SystemRequirment { get; } = new SystemRequirmentService(Context);
         public static IPostService Post { get; } = new PostService(Context);
+        public static IPostCommentService PostComment { get; } = new PostCommentService(Context);
+        public static IPollService PollService{ get; } = new PollService(Context);
     }
 }

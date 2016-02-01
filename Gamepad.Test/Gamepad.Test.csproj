@@ -65,6 +65,7 @@
     <Compile Include="ServicesTests\BaseServiceTest.cs" />
     <Compile Include="ServicesTests\ConfigServiceTest.cs" />
     <Compile Include="ServicesTests\ExternalRankServiceTest.cs" />
+    <Compile Include="ServicesTests\PollServiceTest.cs" />
     <Compile Include="ServicesTests\PostServicesTest.cs" />
     <Compile Include="ServicesTests\RateServicesTest.cs" />
     <Compile Include="ServicesTests\SystemHardwareServiceTest.cs" />

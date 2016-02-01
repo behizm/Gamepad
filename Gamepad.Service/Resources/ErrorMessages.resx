@@ -186,4 +186,7 @@
   <data name="Services_General_OperationError" xml:space="preserve">
     <value>خطای سیستمی رخ داد.</value>
   </data>
+  <data name="Services_General_NoAccess" xml:space="preserve">
+    <value>امکان انجام این درخواست وجود ندارد.</value>
+  </data>
 </root>

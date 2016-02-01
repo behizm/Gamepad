@@ -43,6 +43,8 @@ namespace Gamepad.Service.Data.Entities
 
         public bool IsHidden { get; set; }
 
+        public bool IsForbiddenComment { get; set; }
+
 
 
         [ForeignKey("Author")]
