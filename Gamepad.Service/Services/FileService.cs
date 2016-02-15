@@ -31,5 +31,7 @@ namespace Gamepad.Service.Services
             }
             return Insert(item);
         }
+
+        // todo : thumbnails for images or videos
     }
 }
