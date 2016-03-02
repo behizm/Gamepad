@@ -79,7 +79,7 @@ namespace Gamepad.Test.ServicesTests
             var result = GpServices.Cast.Update(cast);
             Assert.IsTrue(result.Succeeded, result.LastError);
 
-            result = GpServices.Cast.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -105,7 +105,7 @@ namespace Gamepad.Test.ServicesTests
             Assert.IsTrue(string.Equals(cast.Value, "Ea", StringComparison.CurrentCultureIgnoreCase));
             var result = GpServices.Cast.Delete(cast);
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.Cast.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
     }

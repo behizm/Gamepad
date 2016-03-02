@@ -33,6 +33,15 @@ namespace Gamepad.Test
             Console.WriteLine(Regex.IsMatch(st, @"^[a-z0-9._%=-]+@[a-z0-9.-]+\.[A-Za-z]{2,4}$"));
         }
 
+        [TestMethod]
+        public void RegexCheck2()
+        {
+            var st = "045-151414-9";
+            Console.WriteLine(Regex.IsMatch(st, @"^\d{3}-\d{6}-\d{1}$"));
+            Console.WriteLine(Regex.IsMatch(st, @"^\d{10}$"));
+            Console.WriteLine(Regex.IsMatch(st, @"^\d{3}-\d{6}-\d{1}$|^\d{10}$"));
+        }
+
 
     }
 }

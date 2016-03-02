@@ -33,7 +33,7 @@ namespace Gamepad.Test.ServicesTests
                 Action = "createUser"
             });
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.Genre.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
             Console.WriteLine(@"... pass.");
         }
@@ -75,7 +75,7 @@ namespace Gamepad.Test.ServicesTests
             Console.WriteLine(@"add permission to role ...");
             var result = GpServices.Permission.AddToRole(permissionId, "admin");
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.Genre.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
             Console.WriteLine(@"... pass.");
         }
@@ -95,7 +95,7 @@ namespace Gamepad.Test.ServicesTests
             Console.WriteLine(@"remove permission from role ...");
             var result = GpServices.Permission.RemoveFromRole(permissionId, "admin");
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.Genre.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
             Console.WriteLine(@"... pass.");
         }
@@ -108,7 +108,7 @@ namespace Gamepad.Test.ServicesTests
             Console.WriteLine(@"delete permission ...");
             var result = GpServices.Permission.Delete(permissionId);
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.Genre.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
             Console.WriteLine(@"... pass.");
         }

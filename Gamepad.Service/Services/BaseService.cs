@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Gamepad.Service.Data;
 using Gamepad.Service.Data.Entities;
 using Gamepad.Service.Liberary;
@@ -42,7 +43,7 @@ namespace Gamepad.Service.Services
             return OperationResult.Success;
         }
 
-        public virtual OperationResult UpdateBatch(ICollection<TEntity> items)
+        public virtual OperationResult UpdateRange(ICollection<TEntity> items)
         {
             foreach (var item in items)
             {
@@ -79,7 +80,10 @@ namespace Gamepad.Service.Services
 
         public virtual OperationResult DeleteRange(ICollection<TEntity> items)
         {
-            Context.Set<TEntity>().RemoveRange(items);
+            foreach (var item in items)
+            {
+                Context.Entry(item).State = EntityState.Deleted;
+            }
             return OperationResult.Success;
         }
 
@@ -103,9 +107,26 @@ namespace Gamepad.Service.Services
             }
         }
 
+        public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            try
+            {
+                return await Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public virtual TEntity FindById(Guid id)
         {
             return Get(x => x.Id == id);
+        }
+
+        public virtual async Task<TEntity> FindByIdAsync(Guid id)
+        {
+            return await GetAsync(x => x.Id == id);
         }
 
         public virtual IQueryable<TEntity> Search(Expression<Func<TEntity, bool>> predicate)
@@ -132,20 +153,15 @@ namespace Gamepad.Service.Services
             }
         }
 
-        public virtual OperationResult SaveChanges()
+        public virtual async Task<int?> CountAsync(Expression<Func<TEntity, bool>> predicate)
         {
             try
             {
-                Context.SaveChanges();
-                return OperationResult.Success;
+                return await Context.Set<TEntity>().CountAsync(predicate);
             }
-            catch (DbEntityValidationException exception)
+            catch (Exception)
             {
-                return OperationResult.Failed(exception, ErrorMessages.Services_General_OperationError);
-            }
-            catch (Exception exception)
-            {
-                return OperationResult.Failed(exception, ErrorMessages.Services_General_OperationError);
+                return null;
             }
         }
 

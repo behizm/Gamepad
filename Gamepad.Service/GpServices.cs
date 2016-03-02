@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity.Validation;
+using System.Threading.Tasks;
 using Gamepad.Service.Data;
 using Gamepad.Service.Interfaces;
 using Gamepad.Service.Models.ResultModels;
@@ -16,8 +17,8 @@ namespace Gamepad
             EventManager.Laod();
         }
 
-
         private static readonly GamepadContext Context = new GamepadContext();
+
         public static OperationResult SaveChanges()
         {
             try
@@ -33,6 +34,28 @@ namespace Gamepad
             {
                 return OperationResult.Failed(exception, ErrorMessages.Services_General_OperationError);
             }
+        }
+
+        public static async Task<OperationResult> SaveChangesAsync()
+        {
+            var operationResult = OperationResult.Success;
+            var task = Task.Run(() =>
+            {
+                try
+                {
+                    Context.SaveChanges();
+                }
+                catch (DbEntityValidationException exception)
+                {
+                    operationResult = OperationResult.Failed(exception.Message, "خطا از سمت پایگاه داده");
+                }
+                catch (Exception exception)
+                {
+                    operationResult = OperationResult.Failed(exception.Message, "خطا از سمت پایگاه داده");
+                }
+            });
+            await task;
+            return operationResult;
         }
 
 

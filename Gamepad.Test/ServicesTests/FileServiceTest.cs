@@ -33,7 +33,7 @@ namespace Gamepad.Test.ServicesTests
                 Address = "address5"
             });
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.File.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
     }

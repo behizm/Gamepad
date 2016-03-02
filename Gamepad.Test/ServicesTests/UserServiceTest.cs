@@ -30,7 +30,7 @@ namespace Gamepad.Test.ServicesTests
                 Username = "test14",
             }, "123456");
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -39,7 +39,7 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.User.ChangeUsername("test014", "test14");
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -48,7 +48,7 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.User.ChangeEmail("test014", "test014@yahoo.com");
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -57,7 +57,7 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.User.ChangePassword("test014", "123456", "123456789");
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -80,7 +80,7 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.User.ChangeEmailConfirmed("test014", false);
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -89,7 +89,7 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.User.ChangeLock("test014", false);
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -101,7 +101,7 @@ namespace Gamepad.Test.ServicesTests
             {
                 Console.WriteLine(result.LastError);
             }
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -139,7 +139,7 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.User.AddToRole("test014", "FirstRole");
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -155,7 +155,7 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.User.RemoveFromRole("test014", "FirstRole");
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -165,7 +165,7 @@ namespace Gamepad.Test.ServicesTests
             var result = GpServices.User.ChangeAvatar("test014", Guid.Parse("0813fff5-0345-4798-aec1-4db3570346d5"));
             Assert.IsNotNull(result);
             Console.WriteLine(result);
-            var saveResult = GpServices.User.SaveChanges();
+            var saveResult = GpServices.SaveChanges();
             Assert.IsTrue(saveResult.Succeeded, saveResult.LastError);
         }
 
@@ -184,7 +184,7 @@ namespace Gamepad.Test.ServicesTests
                 Website = ".com"
             });
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -193,7 +193,7 @@ namespace Gamepad.Test.ServicesTests
         {
             var result = GpServices.User.ChangeProfileType("test014", ProfileType.Legal);
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
         }
 
@@ -207,7 +207,7 @@ namespace Gamepad.Test.ServicesTests
                 ProfileId = Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3")
             });
             Assert.IsTrue(result.Succeeded, result.LastError);
-            result = GpServices.User.SaveChanges();
+            result = GpServices.SaveChanges();
             Assert.IsTrue(result.Succeeded, result.LastError);
 
             var user = GpServices.User.FindById(Guid.Parse("7d2199a9-09a3-470e-b877-d755d69e2fb3"));
